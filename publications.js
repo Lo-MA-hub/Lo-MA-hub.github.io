@@ -20,37 +20,8 @@ function normalizeSpaces(s) {
 function formatAuthors(authorStr) {
     if (!authorStr) return "";
 
-    // Detect whether a raw author string refers to Peijie (Max) Ma.
-    function isPeijie(raw) {
-        if (!raw) return false;
-        // Normalize: remove dots and parentheses, collapse spaces
-        const s = normalizeSpaces(raw).replace(/\./g, "").replace(/[()]/g, "").toLowerCase();
-
-        // Common explicit matches
-        if (s.includes("peijie") && s.includes("ma")) return true;
-        if (s.includes("max") && s.includes("ma")) return true;
-
-        // Comma form: "Ma, Peijie" or "Ma, P." etc.
-        if (s.includes(",")) {
-            const [last, first] = s.split(",").map(x => x.trim());
-            if (last === "ma" && (first.startsWith("p") || first.startsWith("peijie") || first.startsWith("max"))) return true;
-        }
-
-        // Space-delimited form: "P Ma" or "Peijie Ma"
-        const parts = s.split(" ").filter(Boolean);
-        if (parts.length >= 2) {
-            const first = parts[0];
-            const last = parts[parts.length - 1];
-            if (last === "ma" && (first.startsWith("p") || first.startsWith("peijie") || first.startsWith("max"))) return true;
-        }
-
-        return false;
-    }
-
     const authorList = authorStr.split(" and ").map(raw => {
         const author = normalizeSpaces(raw);
-
-        let formattedName;
 
         // BibTeX canonical: "Last, First Middle"
         if (author.includes(",")) {
@@ -62,30 +33,24 @@ function formatAuthors(authorStr) {
                 .filter(Boolean)
                 .map(n => (n[0] ? n[0].toUpperCase() + "." : ""))
                 .join(" ");
-            formattedName = normalizeSpaces(`${initials} ${last}`).trim();
-        } else {
-            // Fallback: "First Middle Last"
-            const parts = author.split(" ").filter(Boolean);
-            if (parts.length >= 2) {
-                const last = parts.pop();
-                const initials = parts
-                    .map(n => (n[0] ? n[0].toUpperCase() + "." : ""))
-                    .join(" ");
-                formattedName = normalizeSpaces(`${initials} ${last}`).trim();
-            } else {
-                formattedName = author;
-            }
+            return normalizeSpaces(`${initials} ${last}`).trim();
         }
 
-        // Escape HTML in the formatted name, then bold only if it's Peijie Ma
-        const escaped = escapeHTML(formattedName);
-        if (isPeijie(author)) {
-            return `<strong>${escaped}</strong>`;
+        // Fallback: "First Middle Last"
+        const parts = author.split(" ").filter(Boolean);
+        if (parts.length >= 2) {
+            const last = parts.pop();
+            const initials = parts
+                .map(n => (n[0] ? n[0].toUpperCase() + "." : ""))
+                .join(" ");
+            return normalizeSpaces(`${initials} ${last}`).trim();
         }
-        return escaped;
+
+        return author;
     });
 
-    return authorList.join(", ");
+    const formatted = authorList.join(", ");
+    return highlightMyName(formatted);
 }
 
 function highlightMyName(authorLine) {

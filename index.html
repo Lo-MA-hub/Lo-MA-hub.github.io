@@ -93,7 +93,32 @@
 
             </div>
         </section>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+        <section class="section-block reveal-on-scroll delay-200">
+            <h2 class="section-title">Interests & Analytics</h2>
+
+            <div class="stats-grid">
+                <div class="stats-card">
+                    <h3>Time Allocation</h3>
+                    <p class="stats-desc">How I spend my life: transitioning from pure learning to exploring the
+                        vertical world (Climbing) and the snowy slopes (Skiing).</p>
+                    <div class="chart-wrapper">
+                        <canvas id="timeChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="stats-card">
+                    <h3>Footprint</h3>
+                    <p class="stats-desc">Currently based in <span class="highlight">NYC</span>. Exploring the
+                        boundaries of digital and physical spaces.</p>
+                    <div class="map-placeholder">
+                        <div class="map-dot"></div>
+                        <span>New York, USA</span>
+                    </div>
+                </div>
+            </div>
+        </section>
         <section class="section-block reveal-on-scroll delay-300">
             <h2 class="section-title">Publications</h2>
             <div id="pub-sections">
@@ -132,7 +157,98 @@
             observer.observe(el);
         });
     </script>
+    <script>
+        const ctx = document.getElementById('timeChart').getContext('2d');
 
+        // McLaren F1 Theme Colors
+        const colorResearch = 'rgba(255, 128, 0, 0.8)';   // Orange
+        const colorCoding = 'rgba(0, 85, 204, 0.7)';    // Blue
+        const colorSkiing = 'rgba(0, 255, 255, 0.6)';   // Cyan (Ice)
+        const colorClimb = 'rgba(155, 89, 182, 0.7)';  // Purple
+        const colorLife = 'rgba(100, 100, 100, 0.3)'; // Grey
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                // X轴：年龄 0 - 25
+                labels: ['0', '5', '10', '15', '18', '20', '22', '24', '25'],
+                datasets: [
+                    {
+                        label: 'Rock Climbing',
+                        data: [0, 0, 0, 5, 10, 15, 20, 25, 28], // 随着年龄增长入坑攀岩
+                        borderColor: colorClimb,
+                        backgroundColor: colorClimb,
+                        fill: true,
+                        tension: 0.4 // 平滑曲线
+                    },
+                    {
+                        label: 'Skiing',
+                        data: [0, 0, 5, 10, 15, 12, 18, 22, 25], // 滑雪时间
+                        borderColor: colorSkiing,
+                        backgroundColor: colorSkiing,
+                        fill: true,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Research & Coding',
+                        data: [0, 5, 15, 30, 40, 50, 55, 60, 65], // 核心主业
+                        borderColor: colorResearch,
+                        backgroundColor: colorResearch,
+                        fill: true,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Study (School)',
+                        data: [10, 80, 70, 50, 30, 20, 10, 5, 0], // 学校课程逐渐减少
+                        borderColor: colorCoding,
+                        backgroundColor: colorCoding,
+                        fill: true,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Sleep & Chill',
+                        data: [100, 100, 100, 100, 100, 100, 100, 100, 100], // 填满剩余背景
+                        borderColor: 'transparent',
+                        backgroundColor: colorLife,
+                        fill: true,
+                        pointRadius: 0
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: { color: '#ccc', font: { family: 'Inter' } }
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        backgroundColor: 'rgba(0,0,0,0.8)',
+                        titleColor: '#fff',
+                        bodyColor: '#fff'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        stacked: false, // 改为 false 让曲线重叠更有层次感，或者 true 变成纯堆叠
+                        display: false, // 隐藏Y轴刻度，看起来更像艺术图
+                        max: 100
+                    },
+                    x: {
+                        grid: { display: false, color: '#333' },
+                        ticks: { color: '#888' }
+                    }
+                },
+                elements: {
+                    point: { radius: 0, hitRadius: 10 } // 隐藏普通点，鼠标放上去才显示
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>

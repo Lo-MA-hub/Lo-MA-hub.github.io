@@ -8,27 +8,27 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@500;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@400;500;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <header class="top-nav">
+    <header class="top-nav reveal-on-scroll">
         <div class="logo">PM.</div>
     </header>
 
     <main class="container">
 
-        <section class="hero">
+        <section class="hero reveal-on-scroll">
             <div class="hero-content">
-                <h1 class="glitch-effect">Peijie (Max) Ma</h1>
+                <h1>Peijie (Max) Ma</h1>
                 <p class="subtitle">
                     Computer Engineering & Mathematics @ <span class="highlight">NYU Tandon</span>
                 </p>
                 <p class="bio">
-                    Building the future of <strong>6G Communications</strong>. <br>
+                    Building the future of <strong>6G Communications</strong>.<br>
                     Focusing on Wireless Digital Twins, Ray Tracing, and 3D Reconstruction.
                 </p>
 
@@ -42,24 +42,59 @@
             </div>
         </section>
 
-        <hr class="divider">
+        <hr class="divider reveal-on-scroll delay-100">
 
-        <section class="section-block">
-            <h2 class="section-title">Key Projects</h2>
+        <section class="section-block reveal-on-scroll delay-200">
+            <h2 class="section-title">Selected Projects</h2>
             <div class="project-grid">
-                <div class="project-card">
+
+                <a href="https://github.com/Lo-MA-hub" target="_blank" class="project-card"
+                    style="text-decoration: none;">
+                    <div class="project-link-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M7 17L17 7M17 7H7M17 7V17" />
+                        </svg>
+                    </div>
                     <h3>Wireless Digital Twins</h3>
-                    <p>Creation of high-fidelity digital replicas using site-specific Ray Tracing for 6G propagation
-                        modeling.</p>
-                </div>
-                <div class="project-card">
+                    <p class="project-desc">
+                        A high-fidelity digital replica framework using site-specific <strong>Ray Tracing</strong>.
+                        Simulates 6G mmWave propagation in complex indoor environments with sub-meter accuracy.
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">C++</span>
+                        <span class="tech-tag">NVIDIA OptiX</span>
+                        <span class="tech-tag">Ray Tracing</span>
+                        <span class="tech-tag">Digital Twin</span>
+                    </div>
+                </a>
+
+                <a href="https://github.com/Lo-MA-hub" target="_blank" class="project-card"
+                    style="text-decoration: none;">
+                    <div class="project-link-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M7 17L17 7M17 7H7M17 7V17" />
+                        </svg>
+                    </div>
                     <h3>Indoor 3D Reconstruction</h3>
-                    <p>Point cloud processing and material classification algorithms to automate indoor mapping.</p>
-                </div>
+                    <p class="project-desc">
+                        Automated pipeline for generating semantic 3D point clouds.
+                        Uses Deep Learning to classify building materials (glass, concrete, wood) for radio-propagation
+                        analysis.
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">PyTorch</span>
+                        <span class="tech-tag">LiDAR</span>
+                        <span class="tech-tag">Computer Vision</span>
+                    </div>
+                </a>
+
             </div>
         </section>
 
-        <section class="section-block">
+        <section class="section-block reveal-on-scroll delay-300">
             <h2 class="section-title">Publications</h2>
             <div id="pub-sections">
                 <p class="loading">Loading research data...</p>
@@ -69,11 +104,34 @@
     </main>
 
     <footer>
-        &copy; 2025 Peijie Ma. Driven by Data.
+        <div class="reveal-on-scroll">
+            &copy; 2025 Peijie Ma. <span style="color:var(--accent)">Keep Pushing.</span>
+        </div>
     </footer>
 
     <script src="vendor/bibtexParse.js"></script>
     <script src="publications.js"></script>
+
+    <script>
+        // 这段简单的代码实现了 qzq.at 那种“滑到哪里，哪里就浮现出来”的效果
+        const observerOptions = {
+            threshold: 0.1, // 元素出现 10% 时触发
+            rootMargin: "0px 0px -50px 0px" // 稍微提前一点触发
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target); // 动画只播放一次
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-on-scroll').forEach((el) => {
+            observer.observe(el);
+        });
+    </script>
 
 </body>
 

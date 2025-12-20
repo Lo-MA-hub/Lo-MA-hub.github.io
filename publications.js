@@ -284,7 +284,13 @@ async function main() {
             renderSection("Conference Papers", buckets.Conference) +
             renderSection("arXiv Preprints", buckets.arXiv) +
             renderSection("Other", buckets.Other);
-
+        const newElements = container.querySelectorAll('.pub-section, .pub-entry');
+        if (window.observer) { // 假设你在 window 上挂载了 observer，或者直接复制上面的 observer 逻辑
+            newElements.forEach(el => {
+                el.classList.add('reveal-on-scroll'); // 如果你想每篇论文都淡入
+                // 这里比较复杂，建议直接让整个 Publications 板块淡入即可（HTML里已经写了）
+            });
+        }
         if (!container.innerHTML.trim()) {
             container.innerHTML = "<p>No publications found.</p>";
         }

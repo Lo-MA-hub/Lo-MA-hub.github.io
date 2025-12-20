@@ -1,299 +1,135 @@
-:root {
-    /* McLaren / Tech Palette */
-    --bg-color: #0f1012;
-    /* Almost Black */
-    --card-bg: #1a1c20;
-    /* Dark Grey */
-    --text-main: #e0e0e0;
-    /* Off White */
-    --text-muted: #8b949e;
-    /* Grey text */
-    --accent: #FF8000;
-    /* McLaren Papaya Orange */
-    --accent-hover: #ff9e3d;
-    /* Lighter Orange */
-    --border: #30363d;
+/* =========================================
+   1. Animation Utilities (The "qzq.at" Vibe)
+   ========================================= */
 
-    --font-heading: "Space Grotesk", sans-serif;
-    --font-body: "Inter", system-ui, sans-serif;
+/* 初始状态：隐藏并下移 */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    /*非常顺滑的贝塞尔曲线*/
+    will-change: transform, opacity;
 }
 
-body {
-    margin: 0;
-    background-color: var(--bg-color);
-    color: var(--text-main);
-    font-family: var(--font-body);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
+/* 激活状态：回到原位 */
+.reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-/* Layout */
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 24px 80px 24px;
+/* 错峰显示：让元素一个接一个出来，而不是同时出来 */
+.delay-100 {
+    transition-delay: 0.1s;
 }
 
-.top-nav {
-    padding: 20px 24px;
-    max-width: 800px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.delay-200 {
+    transition-delay: 0.2s;
 }
 
-.logo {
-    font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: 1.2rem;
-    color: var(--accent);
-    letter-spacing: -0.5px;
+.delay-300 {
+    transition-delay: 0.3s;
 }
 
-/* Typography & Hero */
-.hero {
-    margin-top: 60px;
-    margin-bottom: 60px;
-}
+/* =========================================
+   2. Enhanced Project Cards (Tech Style)
+   ========================================= */
 
-h1 {
-    font-family: var(--font-heading);
-    font-size: 3.5rem;
-    /* Big Bold Name */
-    font-weight: 700;
-    margin: 0 0 16px 0;
-    line-height: 1.1;
-    letter-spacing: -1px;
-}
-
-.subtitle {
-    font-size: 1.25rem;
-    color: var(--text-muted);
-    margin-bottom: 24px;
-    font-weight: 300;
-}
-
-.highlight {
-    color: var(--accent);
-    font-weight: 600;
-}
-
-.bio {
-    max-width: 600px;
-    color: var(--text-main);
-    font-size: 1.1rem;
-    opacity: 0.9;
-}
-
-/* Buttons & Links */
-.links-row {
-    margin-top: 32px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    align-items: center;
-}
-
-.btn {
-    display: inline-block;
-    padding: 10px 20px;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition: all 0.2s ease;
-}
-
-.btn-primary {
-    background-color: var(--accent);
-    color: #000;
-    /* Contrast against orange */
-    border: 1px solid var(--accent);
-}
-
-.btn-primary:hover {
-    background-color: var(--accent-hover);
-    border-color: var(--accent-hover);
-    transform: translateY(-2px);
-}
-
-.btn-outline {
-    background: transparent;
-    color: var(--text-main);
-    border: 1px solid var(--border);
-}
-
-.btn-outline:hover {
-    border-color: var(--text-main);
-    background: rgba(255, 255, 255, 0.05);
-}
-
-.btn-text {
-    color: var(--accent);
-    margin-left: 8px;
-}
-
-.btn-text:hover {
-    text-decoration: underline;
-}
-
-/* Sections */
-.divider {
-    border: 0;
-    height: 1px;
-    background: var(--border);
-    margin: 40px 0;
-}
-
-.section-block {
-    margin-bottom: 60px;
-}
-
-.section-title {
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    border-left: 4px solid var(--accent);
-    padding-left: 12px;
-    margin-bottom: 24px;
-    color: var(--text-main);
-}
-
-/* Project Cards */
 .project-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /*稍微宽一点*/
+    gap: 24px;
 }
 
 .project-card {
-    background: var(--card-bg);
-    padding: 24px;
-    border-radius: 8px;
-    border: 1px solid transparent;
-    transition: 0.2s;
+    background: linear-gradient(145deg, #1a1c20 0%, #121315 100%);
+    /* 微妙的渐变 */
+    padding: 28px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
+/* Hover Effect: McLaren Orange Glow */
 .project-card:hover {
     border-color: var(--accent);
-    transform: translateY(-2px);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px -10px rgba(255, 128, 0, 0.15);
+    /* 橙色光晕 */
 }
 
 .project-card h3 {
-    margin: 0 0 10px 0;
-    font-size: 1.1rem;
+    margin-top: 0;
+    font-size: 1.25rem;
     color: #fff;
+    margin-bottom: 12px;
 }
 
-.project-card p {
-    margin: 0;
-    font-size: 0.95rem;
-    color: var(--text-muted);
-}
-
-/* Publications List styling */
-.pub-section h3 {
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--text-muted);
-    margin-top: 40px;
-    margin-bottom: 16px;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 8px;
-}
-
-/* Custom List Reset for Publications */
-.pub-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-/* The Paper Entry (Card-like) */
-.pub-entry {
-    background: transparent;
-    padding: 16px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    transition: 0.2s;
-}
-
-.pub-entry:last-child {
-    border-bottom: none;
-}
-
-.pub-title {
-    font-weight: 600;
-    font-size: 1.05rem;
-    color: #fff;
-    display: block;
-    margin-bottom: 6px;
-}
-
-.pub-authors {
+.project-desc {
     color: var(--text-muted);
     font-size: 0.95rem;
-    margin-bottom: 4px;
+    margin-bottom: 20px;
+    flex-grow: 1;
 }
 
-.pub-authors strong {
-    color: var(--accent);
-    /* Highlight YOUR name in Orange */
-    font-weight: 600;
-}
-
-.pub-meta {
-    font-size: 0.85rem;
-    color: #666;
-    margin-bottom: 10px;
-}
-
-.pub-venue {
-    color: #ccc;
-    font-style: italic;
-}
-
-/* Publication Buttons */
-.pub-links {
+/* Tech Tags (e.g., C++, Python) */
+.tech-stack {
     display: flex;
-    gap: 10px;
-    margin-top: 8px;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: auto;
+    /* Push to bottom */
 }
 
-.pub-btn {
+.tech-tag {
+    font-family: "Space Grotesk", monospace;
+    /* 科技感字体 */
     font-size: 0.75rem;
-    text-decoration: none;
+    color: var(--accent);
+    background: rgba(255, 128, 0, 0.1);
     padding: 4px 10px;
     border-radius: 4px;
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--text-main);
-    transition: 0.2s;
+    border: 1px solid rgba(255, 128, 0, 0.2);
 }
 
-.pub-btn:hover {
-    background: var(--accent);
-    color: #000;
-}
-
-footer {
-    text-align: center;
+/* Link icon overlay */
+.project-link-icon {
+    position: absolute;
+    top: 24px;
+    right: 24px;
     color: var(--text-muted);
-    font-size: 0.8rem;
-    padding-bottom: 40px;
-    margin-top: 60px;
+    opacity: 0;
+    transition: 0.3s;
+    transform: translate(-10px, 10px);
 }
 
-/* Mobile Adjustments */
-@media (max-width: 600px) {
-    h1 {
-        font-size: 2.5rem;
-    }
+.project-card:hover .project-link-icon {
+    opacity: 1;
+    transform: translate(0, 0);
+    color: var(--accent);
+}
 
-    .top-nav {
-        padding: 15px 20px;
-    }
+/* =========================================
+   3. Custom Scrollbar (Polished look)
+   ========================================= */
+::-webkit-scrollbar {
+    width: 8px;
+}
 
-    .container {
-        padding: 0 20px 60px 20px;
-    }
+::-webkit-scrollbar-track {
+    background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
 }

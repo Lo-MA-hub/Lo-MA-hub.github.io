@@ -53,3 +53,34 @@ h2 {
 #pub-list .venue {
     font-weight: 600;
 }
+
+.pub-section {
+    margin-top: 24px;
+}
+
+.pub-section h3 {
+    font-size: 1.05rem;
+    margin: 0 0 10px 0;
+}
+
+.pub-list {
+    padding-left: 20px;
+}
+
+.pub-list li {
+    margin-bottom: 1.2em;
+    line-height: 1.55;
+}
+
+.pub-links a {
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+.pub-links a:hover {
+    text-decoration: underline;
+}
+
+.venue {
+    font-weight: 600;
+}

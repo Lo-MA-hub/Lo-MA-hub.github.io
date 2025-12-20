@@ -331,3 +331,217 @@
     transform: scale(1.1);
     transition: all 0.3s ease;
 }
+
+/* =========================================
+   Landon Norris Inspired Hero Theme
+   ========================================= */
+
+:root {
+    /* New Palette: Warm & Editorial */
+    --bg-color: #F7F7F5;
+    /* Warm stone/paper background */
+    --text-primary: #2A2A2A;
+    /* Soft Charcoal */
+    --text-secondary: #5C5C5C;
+    /* Medium Grey */
+    --accent-warm: #C86B40;
+    /* Burnt Sienna / Muted Orange */
+    --line-color: rgba(0, 0, 0, 0.08);
+    /* Very subtle dividers */
+    --font-heading: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+}
+
+/* --- Layout Container --- */
+.identity-wrapper {
+    position: relative;
+    min-height: 85vh;
+    /* Takes up most of the screen */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    /* Left aligned like editorial sites */
+    padding: 0 10%;
+    /* Generous horizontal whitespace */
+    overflow: hidden;
+}
+
+/* --- Typography Hierarchy --- */
+.intro-label {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--accent-warm);
+    font-weight: 500;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.main-name {
+    font-family: var(--font-heading);
+    font-size: clamp(3rem, 6vw, 5rem);
+    /* Responsive giant text */
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--text-primary);
+    margin: 0;
+    letter-spacing: -0.02em;
+    /* Tight tracking for modern look */
+}
+
+.title-separator {
+    width: 60px;
+    height: 3px;
+    background-color: var(--accent-warm);
+    margin: 2rem 0;
+}
+
+.main-bio {
+    font-family: var(--font-body);
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin-bottom: 2.5rem;
+}
+
+.main-bio strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.highlight {
+    color: var(--accent-warm);
+}
+
+/* --- Minimalist Buttons --- */
+.links-row {
+    display: flex;
+    gap: 2rem;
+}
+
+.btn-minimal {
+    text-decoration: none;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 1rem;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+/* Subtle underline animation */
+.btn-minimal::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background: var(--accent-warm);
+    bottom: -4px;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.btn-minimal:hover {
+    color: var(--accent-warm);
+}
+
+.btn-minimal:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* --- The Ambient Background Orbit --- */
+/* This replaces the busy icons with pure geometry */
+.ambient-orbit {
+    position: absolute;
+    top: 50%;
+    right: -10%;
+    /* Positioned off-screen to the right */
+    transform: translateY(-50%);
+    width: 600px;
+    height: 600px;
+    pointer-events: none;
+    /* Just for looks */
+    opacity: 0.6;
+    z-index: -1;
+}
+
+.orbit-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px dashed var(--line-color);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.ring-outer {
+    width: 100%;
+    height: 100%;
+    animation: spin 60s linear infinite;
+}
+
+.ring-inner {
+    width: 60%;
+    height: 60%;
+    animation: spin 40s linear infinite reverse;
+    border-style: solid;
+    /* Inner ring is solid for contrast */
+    border-width: 1px;
+}
+
+.orbit-electron {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: var(--accent-warm);
+    border-radius: 50%;
+    top: 0;
+    left: 50%;
+    transform-origin: 0 300px;
+    /* Orbit radius matches outer ring */
+    animation: orbit-rotate 20s linear infinite;
+    box-shadow: 0 0 15px rgba(217, 112, 64, 0.4);
+}
+
+@keyframes spin {
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes orbit-rotate {
+    0% {
+        transform: rotate(0deg) translateX(-50%);
+    }
+
+    100% {
+        transform: rotate(360deg) translateX(-50%);
+    }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .identity-wrapper {
+        padding: 0 5%;
+        min-height: 70vh;
+    }
+
+    .ambient-orbit {
+        right: -30%;
+        opacity: 0.3;
+    }
+
+    .links-row {
+        gap: 1.5rem;
+    }
+}

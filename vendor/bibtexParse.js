@@ -24,31 +24,31 @@
 //value -> value_quotes | value_braces | key;
 //value_quotes -> '"' .*? '"'; // not quite
 //value_braces -> '{' .*? '"'; // not quite
-(function(exports) {
+(function (exports) {
 
     function BibtexParser() {
 
         this.months = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
-        this.notKey = [',','{','}',' ','='];
+        this.notKey = [',', '{', '}', ' ', '='];
         this.pos = 0;
         this.input = "";
         this.entries = new Array();
 
         this.currentEntry = "";
 
-        this.setInput = function(t) {
+        this.setInput = function (t) {
             this.input = t;
         };
 
-        this.getEntries = function() {
+        this.getEntries = function () {
             return this.entries;
         };
 
-        this.isWhitespace = function(s) {
+        this.isWhitespace = function (s) {
             return (s == ' ' || s == '\r' || s == '\t' || s == '\n');
         };
 
-        this.match = function(s, canCommentOut) {
+        this.match = function (s, canCommentOut) {
             if (canCommentOut == undefined || canCommentOut == null)
                 canCommentOut = true;
             this.skipWhitespace(canCommentOut);
@@ -56,12 +56,12 @@
                 this.pos += s.length;
             } else {
                 throw TypeError("Token mismatch: match", "expected " + s + ", found "
-                        + this.input.substring(this.pos));
+                    + this.input.substring(this.pos));
             };
             this.skipWhitespace(canCommentOut);
         };
 
-        this.tryMatch = function(s, canCommentOut) {
+        this.tryMatch = function (s, canCommentOut) {
             if (canCommentOut == undefined || canCommentOut == null)
                 canCommentOut = true;
             this.skipWhitespace(canCommentOut);
@@ -74,7 +74,7 @@
         };
 
         /* when search for a match all text can be ignored, not just white space */
-        this.matchAt = function() {
+        this.matchAt = function () {
             while (this.input.length > this.pos && this.input[this.pos] != '@') {
                 this.pos++;
             };
@@ -85,7 +85,7 @@
             return false;
         };
 
-        this.skipWhitespace = function(canCommentOut) {
+        this.skipWhitespace = function (canCommentOut) {
             while (this.isWhitespace(this.input[this.pos])) {
                 this.pos++;
             };
@@ -97,7 +97,7 @@
             };
         };
 
-        this.value_braces = function() {
+        this.value_braces = function () {
             var bracecount = 0;
             this.match("{", false);
             var start = this.pos;
@@ -126,7 +126,7 @@
             };
         };
 
-        this.value_comment = function() {
+        this.value_comment = function () {
             var str = '';
             var brcktCnt = 0;
             while (!(this.tryMatch("}", false) && brcktCnt == 0)) {
@@ -143,7 +143,7 @@
             return str;
         };
 
-        this.value_quotes = function() {
+        this.value_quotes = function () {
             this.match('"', false);
             var start = this.pos;
             var escaped = false;
@@ -165,7 +165,7 @@
             };
         };
 
-        this.single_value = function() {
+        this.single_value = function () {
             var start = this.pos;
             if (this.tryMatch("{")) {
                 return this.value_braces();
@@ -183,7 +183,7 @@
             };
         };
 
-        this.value = function() {
+        this.value = function () {
             var values = [];
             values.push(this.single_value());
             while (this.tryMatch("#")) {
@@ -193,13 +193,13 @@
             return values.join("");
         };
 
-        this.key = function(optional) {
+        this.key = function (optional) {
             var start = this.pos;
             while (true) {
                 if (this.pos >= this.input.length) {
                     throw TypeError("Runaway key: key");
                 };
-                                // а-яА-Я is Cyrillic
+                // а-яА-Я is Cyrillic
                 //console.log(this.input[this.pos]);
                 if (this.notKey.indexOf(this.input[this.pos]) >= 0) {
                     if (optional && this.input[this.pos] != ',') {
@@ -214,20 +214,20 @@
             };
         };
 
-        this.key_equals_value = function() {
+        this.key_equals_value = function () {
             var key = this.key();
             if (this.tryMatch("=")) {
                 this.match("=");
                 var val = this.value();
                 key = key.trim()
-                return [ key, val ];
+                return [key, val];
             } else {
                 throw TypeError("Value expected, equals sign missing: key_equals_value",
-                     this.input.substring(this.pos));
+                    this.input.substring(this.pos));
             };
         };
 
-        this.key_value_list = function() {
+        this.key_value_list = function () {
             var kv = this.key_equals_value();
             this.currentEntry['entryTags'] = {};
             this.currentEntry['entryTags'][kv[0]] = kv[1];
@@ -243,7 +243,7 @@
             };
         };
 
-        this.entry_body = function(d) {
+        this.entry_body = function (d) {
             this.currentEntry = {};
             this.currentEntry['citationKey'] = this.key(true);
             this.currentEntry['entryType'] = d.substring(1);
@@ -254,26 +254,26 @@
             this.entries.push(this.currentEntry);
         };
 
-        this.directive = function() {
+        this.directive = function () {
             this.match("@");
             return "@" + this.key();
         };
 
-        this.preamble = function() {
+        this.preamble = function () {
             this.currentEntry = {};
             this.currentEntry['entryType'] = 'PREAMBLE';
             this.currentEntry['entry'] = this.value_comment();
             this.entries.push(this.currentEntry);
         };
 
-        this.comment = function() {
+        this.comment = function () {
             this.currentEntry = {};
             this.currentEntry['entryType'] = 'COMMENT';
             this.currentEntry['entry'] = this.value_comment();
             this.entries.push(this.currentEntry);
         };
 
-        this.entry = function(d) {
+        this.entry = function (d) {
             this.entry_body(d);
         };
 
@@ -289,7 +289,7 @@
             });
         }
 
-        this.bibtex = function() {
+        this.bibtex = function () {
             while (this.matchAt()) {
                 var d = this.directive();
                 this.match("{");
@@ -309,7 +309,7 @@
         };
     };
 
-    exports.toJSON = function(bibtex) {
+    exports.toJSON = function (bibtex) {
         var b = new BibtexParser();
         b.setInput(bibtex);
         b.bibtex();
@@ -320,30 +320,30 @@
     /* Increased the amount of white-space to make entries
      * more attractive to humans. Pass compact as false
      * to enable */
-    exports.toBibtex = function(json, compact) {
+    exports.toBibtex = function (json, compact) {
         if (compact === undefined) compact = true;
         var out = '';
-        
+
         var entrysep = ',';
         var indent = '';
         if (!compact) {
-		      entrysep = ',\n';
-		      indent = '    ';        
+            entrysep = ',\n';
+            indent = '    ';
         }
-        for ( var i in json) {
+        for (var i in json) {
             out += "@" + json[i].entryType;
             out += '{';
             if (json[i].citationKey)
                 out += json[i].citationKey + entrysep;
             if (json[i].entry)
-                out += json[i].entry ;
+                out += json[i].entry;
             if (json[i].entryTags) {
                 var tags = indent;
                 for (var jdx in json[i].entryTags) {
                     if (tags.trim().length != 0)
                         tags += entrysep + indent;
-                    tags += jdx + (compact ? '={' : ' = {') + 
-                            json[i].entryTags[jdx] + '}';
+                    tags += jdx + (compact ? '={' : ' = {') +
+                        json[i].entryTags[jdx] + '}';
                 }
                 out += tags;
             }

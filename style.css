@@ -1,86 +1,299 @@
+:root {
+    /* McLaren / Tech Palette */
+    --bg-color: #0f1012;
+    /* Almost Black */
+    --card-bg: #1a1c20;
+    /* Dark Grey */
+    --text-main: #e0e0e0;
+    /* Off White */
+    --text-muted: #8b949e;
+    /* Grey text */
+    --accent: #FF8000;
+    /* McLaren Papaya Orange */
+    --accent-hover: #ff9e3d;
+    /* Lighter Orange */
+    --border: #30363d;
+
+    --font-heading: "Space Grotesk", sans-serif;
+    --font-body: "Inter", system-ui, sans-serif;
+}
+
 body {
     margin: 0;
-    font-family: "Inter", system-ui, sans-serif;
-    color: #111;
-    background: #fff;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
 }
 
+/* Layout */
 .container {
-    max-width: 720px;
-    margin: 80px auto;
-    padding: 0 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px 80px 24px;
 }
 
-.hero h1 {
-    font-size: 2.4rem;
-    margin-bottom: 0.2em;
+.top-nav {
+    padding: 20px 24px;
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--accent);
+    letter-spacing: -0.5px;
+}
+
+/* Typography & Hero */
+.hero {
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+h1 {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    /* Big Bold Name */
+    font-weight: 700;
+    margin: 0 0 16px 0;
+    line-height: 1.1;
+    letter-spacing: -1px;
 }
 
 .subtitle {
-    font-size: 1.1rem;
-    color: #555;
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    font-weight: 300;
+}
+
+.highlight {
+    color: var(--accent);
+    font-weight: 600;
 }
 
 .bio {
-    margin-top: 1em;
-    line-height: 1.6;
+    max-width: 600px;
+    color: var(--text-main);
+    font-size: 1.1rem;
+    opacity: 0.9;
 }
 
-.links a {
-    margin-right: 16px;
+/* Buttons & Links */
+.links-row {
+    margin-top: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 4px;
     text-decoration: none;
-    color: #0055cc;
-}
-
-section {
-    margin-top: 60px;
-}
-
-h2 {
-    font-size: 1.4rem;
-    margin-bottom: 0.6em;
-}
-
-#pub-list li {
-    margin-bottom: 1.4em;
-    line-height: 1.55;
-}
-
-#pub-list em {
-    font-style: italic;
-}
-
-#pub-list .venue {
     font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
 }
 
-.pub-section {
-    margin-top: 24px;
+.btn-primary {
+    background-color: var(--accent);
+    color: #000;
+    /* Contrast against orange */
+    border: 1px solid var(--accent);
 }
 
-.pub-section h3 {
-    font-size: 1.05rem;
-    margin: 0 0 10px 0;
+.btn-primary:hover {
+    background-color: var(--accent-hover);
+    border-color: var(--accent-hover);
+    transform: translateY(-2px);
 }
 
-.pub-list {
-    padding-left: 20px;
+.btn-outline {
+    background: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--border);
 }
 
-.pub-list li {
-    margin-bottom: 1.2em;
-    line-height: 1.55;
+.btn-outline:hover {
+    border-color: var(--text-main);
+    background: rgba(255, 255, 255, 0.05);
 }
 
-.pub-links a {
-    margin-right: 10px;
-    text-decoration: none;
+.btn-text {
+    color: var(--accent);
+    margin-left: 8px;
 }
 
-.pub-links a:hover {
+.btn-text:hover {
     text-decoration: underline;
 }
 
-.venue {
+/* Sections */
+.divider {
+    border: 0;
+    height: 1px;
+    background: var(--border);
+    margin: 40px 0;
+}
+
+.section-block {
+    margin-bottom: 60px;
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    border-left: 4px solid var(--accent);
+    padding-left: 12px;
+    margin-bottom: 24px;
+    color: var(--text-main);
+}
+
+/* Project Cards */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.project-card {
+    background: var(--card-bg);
+    padding: 24px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: 0.2s;
+}
+
+.project-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.project-card h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.1rem;
+    color: #fff;
+}
+
+.project-card p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+/* Publications List styling */
+.pub-section h3 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin-top: 40px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+}
+
+/* Custom List Reset for Publications */
+.pub-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* The Paper Entry (Card-like) */
+.pub-entry {
+    background: transparent;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: 0.2s;
+}
+
+.pub-entry:last-child {
+    border-bottom: none;
+}
+
+.pub-title {
     font-weight: 600;
+    font-size: 1.05rem;
+    color: #fff;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.pub-authors {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+}
+
+.pub-authors strong {
+    color: var(--accent);
+    /* Highlight YOUR name in Orange */
+    font-weight: 600;
+}
+
+.pub-meta {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.pub-venue {
+    color: #ccc;
+    font-style: italic;
+}
+
+/* Publication Buttons */
+.pub-links {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.pub-btn {
+    font-size: 0.75rem;
+    text-decoration: none;
+    padding: 4px 10px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-main);
+    transition: 0.2s;
+}
+
+.pub-btn:hover {
+    background: var(--accent);
+    color: #000;
+}
+
+footer {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    padding-bottom: 40px;
+    margin-top: 60px;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .top-nav {
+        padding: 15px 20px;
+    }
+
+    .container {
+        padding: 0 20px 60px 20px;
+    }
 }

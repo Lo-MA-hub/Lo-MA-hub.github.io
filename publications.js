@@ -189,6 +189,12 @@ function buildLinks(tags) {
     return links;
 }
 
+/* publications.js - Part 1 stays the same... */
+/* ... (Keep escapeHTML, normalizeSpaces, formatAuthors, highlightMyName, etc. exactly as you had them) ... */
+
+// ... (Paste your helper functions here) ...
+// Or just copy the Render parts below and replace your old render functions:
+
 function renderEntry(entry) {
     const tags = entry.entryTags || {};
     const authors = formatAuthors(tags.author || "");
@@ -199,23 +205,26 @@ function renderEntry(entry) {
 
     const links = buildLinks(tags);
 
-    const venueLineParts = [];
-    if (venue) venueLineParts.push(`<span class="venue">${venue}</span>`);
-    if (year) venueLineParts.push(year);
-    if (note) venueLineParts.push(`<strong>${note}</strong>`);
-    const venueLine = venueLineParts.join(", ");
+    // Build Venue Line
+    const venueParts = [];
+    if (venue) venueParts.push(`<span class="pub-venue">${venue}</span>`);
+    if (year) venueParts.push(year);
+    if (note) venueParts.push(`<span>${note}</span>`);
+    const venueHTML = venueParts.join(" &bull; "); // Use a bullet point separator
 
+    // Build Links as Buttons
     const linksHTML = links.length
         ? `<div class="pub-links">${links
-            .map(l => `<a href="${l.url}" target="_blank" rel="noopener noreferrer">[${escapeHTML(l.label)}]</a>`)
+            .map(l => `<a href="${l.url}" class="pub-btn" target="_blank" rel="noopener noreferrer">${escapeHTML(l.label)}</a>`)
             .join("")}</div>`
         : "";
 
+    // Return a structured DIV instead of a plain LI
     return `
-    <li>
-      ${authors}.<br>
-      <em>${title}</em>.<br>
-      ${venueLine ? `${venueLine}.` : ""}
+    <li class="pub-entry">
+      <span class="pub-title">${title}</span>
+      <div class="pub-authors">${authors}</div>
+      <div class="pub-meta">${venueHTML}</div>
       ${linksHTML}
     </li>
   `;
@@ -227,13 +236,13 @@ function renderSection(title, entries) {
     return `
     <div class="pub-section">
       <h3>${escapeHTML(title)}</h3>
-      <ol class="pub-list">
-        ${items}
-      </ol>
+      <ul class="pub-list"> ${items}
+      </ul>
     </div>
   `;
 }
 
+/* ... (Keep your main() function exactly as is) ... */
 async function main() {
     const container = document.getElementById("pub-sections");
     if (!container) return;
@@ -241,9 +250,10 @@ async function main() {
     try {
         const res = await fetch("publications.bib", { cache: "no-store" });
         const text = await res.text();
+        // Assuming bibtexParse is loaded globally from vendor script
         const entries = bibtexParse.toJSON(text);
 
-        // Classify
+        // ... (Keep your existing bucket sorting logic) ...
         const buckets = {
             Journal: [],
             Conference: [],
@@ -251,16 +261,13 @@ async function main() {
             Other: []
         };
 
-
-
+        // ... (Keep your classification logic) ...
         entries.forEach(e => {
             const tags = e.entryTags || {};
             const cls = classifyEntry(tags);
             buckets[cls].push(e);
         });
 
-        // Optional: stable ordering within each bucket
-        // If year exists, sort descending; otherwise keep original order
         const sortByYearDesc = (a, b) => {
             const ya = parseInt(getYear(a.entryTags || {}), 10);
             const yb = parseInt(getYear(b.entryTags || {}), 10);
@@ -272,16 +279,12 @@ async function main() {
 
         Object.keys(buckets).forEach(k => buckets[k].sort(sortByYearDesc));
 
-        // Render in desired order
         container.innerHTML =
             renderSection("Journal Articles", buckets.Journal) +
             renderSection("Conference Papers", buckets.Conference) +
             renderSection("arXiv Preprints", buckets.arXiv) +
             renderSection("Other", buckets.Other);
 
-
-
-        // Fallback if everything empty
         if (!container.innerHTML.trim()) {
             container.innerHTML = "<p>No publications found.</p>";
         }

@@ -3,55 +3,77 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Peijie (Max) Ma</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Peijie (Max) Ma | NYU Tandon</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+
+    <header class="top-nav">
+        <div class="logo">PM.</div>
+    </header>
+
     <main class="container">
 
         <section class="hero">
-            <h1>Peijie (Max) Ma</h1>
-            <p class="subtitle">
-                Computer Engineering & Mathematics @ NYU Tandon
-            </p>
-            <p class="bio">
-                Researcher in wireless systems, indoor 3D reconstruction,
-                and digital twins for 6G communications.
-            </p>
+            <div class="hero-content">
+                <h1 class="glitch-effect">Peijie (Max) Ma</h1>
+                <p class="subtitle">
+                    Computer Engineering & Mathematics @ <span class="highlight">NYU Tandon</span>
+                </p>
+                <p class="bio">
+                    Building the future of <strong>6G Communications</strong>. <br>
+                    Focusing on Wireless Digital Twins, Ray Tracing, and 3D Reconstruction.
+                </p>
 
-            <div class="links">
-                <a href="assets/cv.pdf">CV</a>
-                <a href="https://scholar.google.com/citations?user=Y9KipPEAAAAJ&hl=en&oi=ao">Google Scholar</a>
-                <a href="https://github.com/Lo-MA-hub">GitHub</a>
-                <a href="mailto:pm3688@nyu.edu">Email: pm3688@nyu.edu</a>
+                <div class="links-row">
+                    <a href="assets/cv.pdf" class="btn btn-primary">CV</a>
+                    <a href="https://scholar.google.com/citations?user=Y9KipPEAAAAJ&hl=en&oi=ao"
+                        class="btn btn-outline">Google Scholar</a>
+                    <a href="https://github.com/Lo-MA-hub" class="btn btn-outline">GitHub</a>
+                    <a href="mailto:pm3688@nyu.edu" class="btn btn-text">pm3688@nyu.edu &rarr;</a>
+                </div>
             </div>
         </section>
 
-        <section>
-            <h2>Publications</h2>
+        <hr class="divider">
+
+        <section class="section-block">
+            <h2 class="section-title">Key Projects</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <h3>Wireless Digital Twins</h3>
+                    <p>Creation of high-fidelity digital replicas using site-specific Ray Tracing for 6G propagation
+                        modeling.</p>
+                </div>
+                <div class="project-card">
+                    <h3>Indoor 3D Reconstruction</h3>
+                    <p>Point cloud processing and material classification algorithms to automate indoor mapping.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-block">
+            <h2 class="section-title">Publications</h2>
             <div id="pub-sections">
-                <p>Loading publications…</p>
+                <p class="loading">Loading research data...</p>
             </div>
-        </section>
-
-
-
-
-        <section>
-            <h2>Projects</h2>
-            <ul>
-                <li>Wireless Digital Twin Creation with Site-Specific Ray Tracing</li>
-                <li>Indoor Point Cloud Reconstruction and Material Classification</li>
-            </ul>
         </section>
 
     </main>
 
+    <footer>
+        &copy; 2025 Peijie Ma. Driven by Data.
+    </footer>
+
     <script src="vendor/bibtexParse.js"></script>
     <script src="publications.js"></script>
-
 
 </body>
 

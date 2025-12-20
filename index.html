@@ -20,6 +20,7 @@
 <body>
 
     <section class="hero-section reveal-on-scroll" id="identity-orbit-section">
+
         <div class="identity-orbit">
             <div class="orbit-ring ring-outer"></div>
             <div class="orbit-ring ring-inner"></div>
@@ -31,17 +32,20 @@
                     <line x1="12" y1="22" x2="12" y2="22"></line>
                 </svg>
             </div>
+
             <div class="orbit-object item-2" title="Full Stack & Ray Tracing">
                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <polyline points="16 18 22 12 16 6"></polyline>
                     <polyline points="8 6 2 12 8 18"></polyline>
                 </svg>
             </div>
+
             <div class="orbit-object item-3" title="Skiing & Climbing">
                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path d="M12 2L2 22h20L12 2z"></path>
                 </svg>
             </div>
+
             <div class="orbit-object item-4" title="New York, USA">
                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
@@ -72,6 +76,7 @@
             <p class="hero-bio-sub">
                 Focusing on 6G Wireless, Digital Twins, and Computational Physics at <strong>NYU Tandon</strong>.
             </p>
+
             <div class="btn-group">
                 <a href="#publications-container" class="btn-primary">View Publications</a>
                 <a href="https://github.com/Lo-MA-hub" class="btn-text">Check Code &rarr;</a>
@@ -81,10 +86,14 @@
 
     <section class="analytics-section reveal-on-scroll" id="analytics-section">
         <div class="analytics-container">
+
             <div class="analytics-card time-card">
                 <div class="card-header">
                     <h3 class="card-title">Time</h3>
-                    <p class="card-subtitle">This is how I spend my time. My biggest hobby is learning.</p>
+                    <p class="card-subtitle">
+                        This is how I spend my time. My biggest hobby is learning, as I am curious about almost
+                        everything.
+                    </p>
                 </div>
                 <div class="chart-wrapper">
                     <canvas id="timeDistributionChart"></canvas>
@@ -94,77 +103,25 @@
             <div class="analytics-card space-card">
                 <div class="card-header">
                     <h3 class="card-title">Space</h3>
-                    <p class="card-subtitle">Travel footprint. Based in <strong>New York, USA</strong>.</p>
+                    <p class="card-subtitle">
+                        This is my travel footprint. Currently based in <strong>New York, USA</strong>.
+                    </p>
                 </div>
+
                 <div class="map-visualizer">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Blank_US_Map_%28states_only%29.svg/1280px-Blank_US_Map_%28states_only%29.svg.png"
-                        class="map-image" alt="Map">
+                        class="map-image" alt="Travel Footprint Map">
+
                     <div class="location-marker nyc-marker">
-                        <div class="marker-dot"><img src="assets/avatar.jpg" class="marker-avatar"
-                                onerror="this.style.display='none'"></div>
+                        <div class="marker-dot">
+                            <img src="assets/avatar.jpg" alt="" class="marker-avatar"
+                                onerror="this.style.display='none'">
+                        </div>
                         <div class="marker-pulse"></div>
                         <div class="marker-label">New York (Living)</div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section class="container reveal-on-scroll" style="margin-bottom: 4rem;">
-        <h2 class="section-title">Selected Projects</h2>
-        <div class="project-grid">
-
-            <a href="https://github.com/Lo-MA-hub" target="_blank" class="project-card">
-                <div class="project-content">
-                    <div class="project-header">
-                        <h3 class="project-title">NYURay Simulator</h3>
-                        <span class="project-year">2024</span>
-                    </div>
-                    <p class="project-desc">
-                        A high-fidelity ray tracing simulator for 6G wireless propagation, calibrated with real-world
-                        channel measurements in FR3 bands.
-                    </p>
-                    <div class="project-tags">
-                        <span class="tag">C++</span>
-                        <span class="tag">Ray Tracing</span>
-                        <span class="tag">6G</span>
-                    </div>
-                </div>
-            </a>
-
-            <a href="https://github.com/Lo-MA-hub" target="_blank" class="project-card">
-                <div class="project-content">
-                    <div class="project-header">
-                        <h3 class="project-title">Digital Twin City</h3>
-                        <span class="project-year">2023</span>
-                    </div>
-                    <p class="project-desc">
-                        Creating precise 3D digital twins of urban environments (NYC/Brooklyn) to predict wireless
-                        coverage and sensing capabilities.
-                    </p>
-                    <div class="project-tags">
-                        <span class="tag">Blender</span>
-                        <span class="tag">Python</span>
-                        <span class="tag">GIS</span>
-                    </div>
-                </div>
-            </a>
-
-            <a href="#" class="project-card">
-                <div class="project-content">
-                    <div class="project-header">
-                        <h3 class="project-title">Channel Sounder</h3>
-                        <span class="project-year">Ongoing</span>
-                    </div>
-                    <p class="project-desc">
-                        Hardware experimentation and data processing for sub-THz and mmWave channel sounding systems.
-                    </p>
-                    <div class="project-tags">
-                        <span class="tag">Matlab</span>
-                        <span class="tag">Hardware</span>
-                    </div>
-                </div>
-            </a>
 
         </div>
     </section>
@@ -181,8 +138,7 @@
         <div>New York, NY</div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/gh/ORCID/bibtexParseJs/bibtexParse.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bibtex-js-parser/lib/bibtex-js-parser.min.js"></script>
     <script src="publications.js"></script>
 
     <script>
@@ -200,6 +156,8 @@
 
         // --- Chart.js Configuration (Stacked Area) ---
         const ctx = document.getElementById('timeDistributionChart').getContext('2d');
+
+        // Theme Colors
         const colorStudy = 'rgba(200, 200, 200, 0.4)';
         const colorGame = 'rgba(255, 159, 64, 0.5)';
         const colorCoding = 'rgba(42, 42, 42, 0.85)';

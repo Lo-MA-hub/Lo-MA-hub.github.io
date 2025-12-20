@@ -1,6 +1,5 @@
 /* publications.js */
 
-// 1. Utilities
 function escapeHTML(str) {
     return (str || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
@@ -9,60 +8,71 @@ function normalizeSpaces(s) {
     return (s || "").replace(/\s+/g, " ").trim();
 }
 
-// 2. Author Formatting
 function formatAuthors(authorStr) {
     if (!authorStr) return "";
-
-    // Split " and "
-    const list = authorStr.split(" and ").map(name => {
-        let cleanName = normalizeSpaces(name);
-
-        // Handle "Last, First"
-        if (cleanName.includes(",")) {
-            const [last, first] = cleanName.split(",").map(s => s.trim());
-            const initials = first ? first.split(" ").map(n => n[0] + ".").join(" ") : "";
-            cleanName = `${initials} ${last}`;
-        } else {
-            // Handle "First Last" -> "F. Last"
-            const parts = cleanName.split(" ");
-            const last = parts.pop();
-            const initials = parts.map(n => n[0] + ".").join(" ");
-            cleanName = `${initials} ${last}`;
+    // 将 " and " 分割为数组
+    const authorList = authorStr.split(" and ").map(raw => {
+        const author = normalizeSpaces(raw);
+        // BibTeX 标准: "Last, First Middle"
+        if (author.includes(",")) {
+            const [lastRaw, firstRaw] = author.split(",").map(s => normalizeSpaces(s));
+            const last = lastRaw;
+            const first = firstRaw || "";
+            // 取首字母
+            const initials = first.split(" ").filter(Boolean)
+                .map(n => (n[0] ? n[0].toUpperCase() + "." : "")).join(" ");
+            return normalizeSpaces(`${initials} ${last}`).trim();
         }
-
-        // Highlight YOUR name
-        if (cleanName.includes("P. Ma") || cleanName.includes("Peijie Ma")) {
-            return `<strong>${cleanName}</strong>`;
-        }
-        return cleanName;
+        // "First Middle Last" 格式回退
+        const parts = author.split(" ");
+        const last = parts.pop();
+        const initials = parts.map(n => (n[0] ? n[0].toUpperCase() + "." : "")).join(" ");
+        return normalizeSpaces(`${initials} ${last}`).trim();
     });
 
-    return list.join(", ");
+    // 高亮你的名字 (支持多种写法)
+    return authorList.map(name => {
+        if (name.includes("P. Ma") || name.includes("Ma P") || name.includes("Peijie Ma")) {
+            return `<strong>${name}</strong>`;
+        }
+        return name;
+    }).join(", ");
 }
 
-// 3. Rendering
-function renderEntry(e) {
-    const t = e.entryTags;
-    const title = escapeHTML(t.title);
-    const authors = formatAuthors(t.author);
-    const venue = escapeHTML(t.journal || t.booktitle || "Preprint");
-    const year = t.year || "";
+function classifyEntry(tags) {
+    // 简单分类逻辑
+    if (tags.journal) return "Journal";
+    if (tags.booktitle) return "Conference";
+    if (tags.publisher && tags.publisher.toLowerCase().includes("arxiv")) return "arXiv";
+    return "Other";
+}
 
-    // Build Links
-    let links = "";
-    if (t.url) links += `<a href="${t.url}" target="_blank">[PDF]</a>`;
-    if (t.doi) links += `<a href="https://doi.org/${t.doi}" target="_blank">[DOI]</a>`;
-    if (t.arxiv) links += `<a href="https://arxiv.org/abs/${t.arxiv}" target="_blank">[arXiv]</a>`;
+function getYear(tags) {
+    return tags.year || "9999";
+}
+
+function renderEntry(e) {
+    const tags = e.entryTags || {};
+    const title = escapeHTML(tags.title);
+    const authors = formatAuthors(tags.author);
+    const venue = escapeHTML(tags.journal || tags.booktitle || "Preprint");
+    const year = escapeHTML(tags.year || "");
+    const pages = tags.pages ? `pp. ${tags.pages}` : "";
+
+    // 链接生成
+    let linksHtml = "";
+    if (tags.url) linksHtml += `<a href="${tags.url}" target="_blank">[PDF]</a>`;
+    if (tags.doi) linksHtml += `<a href="https://doi.org/${tags.doi}" target="_blank">[DOI]</a>`;
 
     return `
-        <div class="pub-entry">
-            <span class="pub-title">${title}</span>
-            <div class="pub-meta">
-                ${authors}<br>
-                <span style="font-style:italic;">${venue}</span> ${year ? `(${year})` : ""}
-            </div>
-            <div class="pub-links">${links}</div>
+    <div class="pub-entry">
+        <span class="pub-title">${title}</span>
+        <div class="pub-authors">${authors}</div>
+        <div class="pub-meta">
+            ${venue} ${year ? `(${year})` : ""} ${pages}
         </div>
+        <div class="pub-links">${linksHtml}</div>
+    </div>
     `;
 }
 
@@ -70,50 +80,58 @@ function renderSection(title, entries) {
     if (!entries || entries.length === 0) return "";
     return `
         <div class="pub-section">
-            <h3 class="pub-section-header">${title}</h3>
+            <h3 style="margin-top: 1.5rem; margin-bottom: 1rem; color:var(--accent-color); font-size:1.1rem; text-transform:uppercase; letter-spacing:1px;">${title}</h3>
             ${entries.map(renderEntry).join("")}
         </div>
     `;
 }
 
-// 4. Main Execution
+// === 主逻辑 ===
 document.addEventListener("DOMContentLoaded", () => {
     const container = document.getElementById("publications-container");
 
     fetch("publications.bib")
-        .then(res => {
-            if (!res.ok) throw new Error("Bib file missing");
-            return res.text();
+        .then(response => {
+            if (!response.ok) throw new Error("Bib file not found (404)");
+            return response.text();
         })
         .then(text => {
+            // 关键：检查解析器是否存在
             if (typeof bibtexParse === 'undefined') {
-                container.innerHTML = "Error: BibTeX parser not loaded.";
-                return;
+                throw new Error("bibtexParse library not loaded properly.");
             }
 
             const entries = bibtexParse.toJSON(text);
 
-            // Buckets
-            const buckets = { Journal: [], Conference: [], Other: [] };
-
+            // 分桶
+            const buckets = { Journal: [], Conference: [], arXiv: [], Other: [] };
             entries.forEach(e => {
-                const tags = e.entryTags;
-                if (tags.journal) buckets.Journal.push(e);
-                else if (tags.booktitle) buckets.Conference.push(e);
-                else buckets.Other.push(e);
+                const cls = classifyEntry(e.entryTags);
+                if (buckets[cls]) buckets[cls].push(e);
+                else buckets.Other.push(e); // fallback
             });
 
-            // Sort by Year Desc
-            const sortFn = (a, b) => (b.entryTags.year || 0) - (a.entryTags.year || 0);
-            Object.values(buckets).forEach(b => b.sort(sortFn));
+            // 排序 (按年份降序)
+            const sortByYearDesc = (a, b) => {
+                const ya = parseInt(getYear(a.entryTags), 10);
+                const yb = parseInt(getYear(b.entryTags), 10);
+                return (Number.isNaN(yb) ? 0 : yb) - (Number.isNaN(ya) ? 0 : ya);
+            };
+            Object.keys(buckets).forEach(k => buckets[k].sort(sortByYearDesc));
 
+            // 渲染
             container.innerHTML =
                 renderSection("Journal Articles", buckets.Journal) +
                 renderSection("Conference Papers", buckets.Conference) +
-                renderSection("Other / Preprints", buckets.Other);
+                renderSection("arXiv Preprints", buckets.arXiv) +
+                renderSection("Other", buckets.Other);
+
+            if (!container.innerHTML.trim()) {
+                container.innerHTML = "<p>No publications found.</p>";
+            }
         })
         .catch(err => {
             console.error(err);
-            container.innerHTML = `<p>Error loading publications. Please check console.</p>`;
+            container.innerHTML = `<p style="color:red;">Error loading publications: ${err.message}. <br>Make sure 'publications.bib' is in the root folder.</p>`;
         });
 });

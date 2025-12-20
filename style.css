@@ -227,204 +227,107 @@
    5. Identity Orbit Section (Experimental)
    ========================================= */
 
+/* =========================================
+   Identity Orbit: Color Harmony Refinement
+   ========================================= */
+
 #identity-orbit {
-    position: relative;
-    padding: 60px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    /* Keep orbits from causing scrollbars */
-    margin-bottom: 40px;
+    /* --- Local Palette Definition --- */
+    /* Backgrounds: Calm & Clean */
+    --id-bg: #fafafa;
+    /* Very light off-white for section */
+    --id-card-bg: #ffffff;
+    /* Pure white for the card */
+
+    /* Typography: Neutral & Readable */
+    --id-text-main: #2d3436;
+    /* Soft charcoal (not harsh black) */
+    --id-text-muted: #95a5a6;
+    /* Lighter gray for labels */
+
+    /* Accents: "Sunset & Steel" */
+    --id-accent-primary: #e6955c;
+    /* Soft Muted Orange (Your Name) */
+    --id-accent-secondary: #7faeb5;
+    /* Desaturated Teal/Blue (Tech elements) */
+
+    /* Structure */
+    --id-orbit-line: rgba(0, 0, 0, 0.04);
+    /* Extremely subtle orbit paths */
+    --id-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+    /* Diffused, elegant shadow */
+
+    /* Apply Background */
+    background-color: var(--id-bg);
+    color: var(--id-text-main);
 }
 
-.orbit-system {
-    position: relative;
-    width: 600px;
-    height: 450px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* --- The Card --- */
+/* --- Card Refinements --- */
 .id-card {
-    position: relative;
-    z-index: 10;
-    background: var(--card-bg);
-    /* Matches your existing cards */
-    padding: 40px;
-    width: 280px;
-    border-radius: 16px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-    /* Deep shadow */
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    text-align: center;
-    /* Glassmorphism hint */
-    backdrop-filter: blur(10px);
+    background: var(--id-card-bg);
+    box-shadow: var(--id-shadow);
+    /* Remove harsh borders, use subtle definition */
+    border: 1px solid rgba(0, 0, 0, 0.02);
+    backdrop-filter: none;
+    /* Removed blur for a crisper academic look */
 }
 
+/* --- Typography Hierarchy --- */
 .id-label {
-    display: block;
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 8px;
-    text-align: left;
+    color: var(--id-text-muted);
+    font-weight: 500;
+    font-size: 0.75rem;
+    /* Slightly smaller for elegance */
+    letter-spacing: 1.5px;
 }
 
 .id-name {
-    font-family: 'Zhi Mang Xing', cursive;
-    /* Brush font */
-    font-size: 3.5rem;
-    color: var(--text-main);
-    margin: 10px 0 20px 0;
-    line-height: 1;
-    text-shadow: 2px 2px 0px var(--accent);
-    /* McLaren Orange Shadow */
-    transform: rotate(-2deg);
-    /* Slight organic tilt */
-}
-
-.id-divider {
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--accent), transparent);
-    margin: 20px 0;
-    opacity: 0.5;
-}
-
-.id-roles {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    text-align: right;
-    /* As per reference image */
+    /* The Hero Element */
+    color: var(--id-accent-primary);
+    text-shadow: none;
+    /* Clean flat look */
+    opacity: 1;
+    /* Optional: subtle gradient for the text itself */
+    background: -webkit-linear-gradient(45deg, var(--id-accent-primary), #f0ad4e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .id-roles li {
-    font-family: "Space Grotesk", sans-serif;
-    color: var(--text-main);
-    font-size: 1.1rem;
-    margin-bottom: 6px;
-    font-weight: 500;
+    color: var(--id-text-main);
+    font-weight: 400;
+    /* Lighter weight */
 }
 
-/* --- The Orbits (Dashed Circles) --- */
+.id-divider {
+    /* Soft gradient using the Secondary accent */
+    background: linear-gradient(90deg, transparent, var(--id-accent-secondary), transparent);
+    opacity: 0.3;
+    /* Very subtle */
+}
+
+/* --- Orbit & Element Refinements --- */
 .orbit-ring {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    border: 1px dashed rgba(255, 255, 255, 0.15);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-}
-
-.ring-outer {
-    width: 550px;
-    height: 550px;
-    animation: orbit-spin 60s linear infinite;
+    border-color: var(--id-orbit-line);
+    border-style: dashed;
 }
 
 .ring-inner {
-    width: 400px;
-    height: 400px;
-    border-color: rgba(255, 128, 0, 0.15);
-    /* Orange tint */
-    animation: orbit-spin 40s linear infinite reverse;
-    /* Spin opposite */
+    /* Inner ring gets a tiny hint of the secondary color */
+    border-color: rgba(127, 174, 181, 0.15);
 }
 
-/* --- Floating Objects (Icons) --- */
 .orbit-object {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    background: var(--bg-color);
-    border: 1px solid var(--border);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--accent);
-    box-shadow: 0 0 15px rgba(255, 128, 0, 0.2);
+    background: var(--id-card-bg);
+    /* Icons use the Secondary Accent (Blue/Teal) */
+    color: var(--id-accent-secondary);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-.orbit-object svg {
-    width: 20px;
-    height: 20px;
-}
-
-/* Positioning objects on the ring */
-/* Adjust 'top/left' to place them on the circle circumference */
-.ring-outer .icon-1 {
-    top: 15%;
-    left: 85%;
-}
-
-.ring-outer .icon-2 {
-    top: 75%;
-    left: 15%;
-}
-
-.ring-inner .icon-3 {
-    top: 0%;
-    left: 50%;
-    margin-top: -20px;
-}
-
-/* Counter-Animation: Keeps icons upright while ring spins */
-.ring-outer .orbit-object {
-    animation: counter-spin 60s linear infinite;
-}
-
-.ring-inner .orbit-object {
-    animation: counter-spin 40s linear infinite reverse;
-}
-
-/* Mobile Adjustment */
-@media (max-width: 600px) {
-    .orbit-system {
-        width: 100%;
-        height: auto;
-    }
-
-    .ring-outer {
-        width: 340px;
-        height: 340px;
-    }
-
-    .ring-inner {
-        width: 260px;
-        height: 260px;
-    }
-
-    .id-card {
-        width: 100%;
-        max-width: 260px;
-    }
-}
-
-/* --- Keyframes --- */
-@keyframes orbit-spin {
-    from {
-        transform: translate(-50%, -50%) rotate(0deg);
-    }
-
-    to {
-        transform: translate(-50%, -50%) rotate(360deg);
-    }
-}
-
-@keyframes counter-spin {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(-360deg);
-    }
-
-    /* Rotates opposite to cancel parent rotation */
+/* Interaction: Hovering an icon warms it up to Primary color */
+.orbit-object:hover {
+    color: var(--id-accent-primary);
+    transform: scale(1.1);
+    transition: all 0.3s ease;
 }

@@ -129,20 +129,34 @@ function classifyEntry(tags) {
     const note = getNote(tags).toLowerCase();
     const arxiv = detectArxiv(tags);
 
-    // Accepted bucket: explicit note has accepted
-    if (note.includes("accepted")) return "Accepted";
+    // 1️⃣ Journal Articles (highest priority)
+    // Heuristics: journal field exists OR venue contains "journal"
+    if (tags.journal || venue.includes("journal")) {
+        return "Journal";
+    }
 
-    // arXiv bucket
-    if (arxiv) return "arXiv";
+    // 2️⃣ Conference Papers
+    const confHints = [
+        "conference",
+        "symposium",
+        "workshop",
+        "globecom",
+        "icc",
+        "infocom"
+    ];
+    if (venue && confHints.some(h => venue.includes(h))) {
+        return "Conference";
+    }
 
-    // Conference bucket: heuristics (booktitle or venue contains common conference keywords)
-    // You can expand this list later
-    const confHints = ["conference", "symposium", "workshop", "globecom", "icc", "infocom"];
-    if (venue && confHints.some(h => venue.includes(h))) return "Conference";
+    // 3️⃣ arXiv Preprints
+    if (arxiv) {
+        return "arXiv";
+    }
 
-    // Otherwise
+    // 4️⃣ Other
     return "Other";
 }
+
 
 function buildLinks(tags) {
     const links = [];

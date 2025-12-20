@@ -41,15 +41,15 @@ h2 {
     margin-bottom: 0.6em;
 }
 
-.pub-list {
-    padding-left: 20px;
+#pub-list li {
+    margin-bottom: 1.4em;
+    line-height: 1.55;
 }
 
-.pub-list li {
-    margin-bottom: 1.2em;
-    line-height: 1.5;
+#pub-list em {
+    font-style: italic;
 }
 
-.venue {
+#pub-list .venue {
     font-weight: 600;
 }

@@ -238,11 +238,12 @@ async function main() {
 
         // Classify
         const buckets = {
-            Accepted: [],
+            Journal: [],
             Conference: [],
             arXiv: [],
             Other: []
         };
+
 
         entries.forEach(e => {
             const tags = e.entryTags || {};
@@ -265,10 +266,11 @@ async function main() {
 
         // Render in desired order
         container.innerHTML =
-            renderSection("Accepted / Published", buckets.Accepted) +
+            renderSection("Journal Articles", buckets.Journal) +
             renderSection("Conference Papers", buckets.Conference) +
             renderSection("arXiv Preprints", buckets.arXiv) +
             renderSection("Other", buckets.Other);
+
 
         // Fallback if everything empty
         if (!container.innerHTML.trim()) {

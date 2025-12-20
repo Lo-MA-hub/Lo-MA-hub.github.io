@@ -173,46 +173,11 @@
                 // X轴：年龄 0 - 25
                 labels: ['0', '5', '10', '15', '18', '20', '22', '24', '25'],
                 datasets: [
-                    {
-                        label: 'Rock Climbing',
-                        data: [0, 0, 0, 5, 10, 15, 20, 25, 28], // 随着年龄增长入坑攀岩
-                        borderColor: colorClimb,
-                        backgroundColor: colorClimb,
-                        fill: true,
-                        tension: 0.4 // 平滑曲线
-                    },
-                    {
-                        label: 'Skiing',
-                        data: [0, 0, 5, 10, 15, 12, 18, 22, 25], // 滑雪时间
-                        borderColor: colorSkiing,
-                        backgroundColor: colorSkiing,
-                        fill: true,
-                        tension: 0.4
-                    },
-                    {
-                        label: 'Research & Coding',
-                        data: [0, 5, 15, 30, 40, 50, 55, 60, 65], // 核心主业
-                        borderColor: colorResearch,
-                        backgroundColor: colorResearch,
-                        fill: true,
-                        tension: 0.4
-                    },
-                    {
-                        label: 'Study (School)',
-                        data: [10, 80, 70, 50, 30, 20, 10, 5, 0], // 学校课程逐渐减少
-                        borderColor: colorCoding,
-                        backgroundColor: colorCoding,
-                        fill: true,
-                        tension: 0.4
-                    },
-                    {
-                        label: 'Sleep & Chill',
-                        data: [100, 100, 100, 100, 100, 100, 100, 100, 100], // 填满剩余背景
-                        borderColor: 'transparent',
-                        backgroundColor: colorLife,
-                        fill: true,
-                        pointRadius: 0
-                    }
+                    { label: 'Sleep/Life', data: [40, 40, 30, 20, 20, 20, 20, 20, 20], bg: colorLife, fill: true },
+                    { label: 'Study', data: [60, 60, 60, 50, 30, 10, 5, 0, 0], bg: colorCoding, fill: true },
+                    { label: 'Coding', data: [0, 0, 10, 20, 30, 40, 40, 40, 40], bg: colorResearch, fill: true },
+                    { label: 'Skiing', data: [0, 0, 0, 5, 10, 15, 15, 20, 20], bg: colorSkiing, fill: true },
+                    { label: 'Climbing', data: [0, 0, 0, 5, 10, 15, 20, 20, 20], bg: colorClimb, fill: true }
                 ]
             },
             options: {
@@ -232,16 +197,8 @@
                     }
                 },
                 scales: {
-                    y: {
-                        beginAtZero: true,
-                        stacked: false, // 改为 false 让曲线重叠更有层次感，或者 true 变成纯堆叠
-                        display: false, // 隐藏Y轴刻度，看起来更像艺术图
-                        max: 100
-                    },
-                    x: {
-                        grid: { display: false, color: '#333' },
-                        ticks: { color: '#888' }
-                    }
+                    y: { stacked: true, display: false, max: 100 },
+                    x: { grid: { display: false }, ticks: { color: '#888' } }
                 },
                 elements: {
                     point: { radius: 0, hitRadius: 10 } // 隐藏普通点，鼠标放上去才显示

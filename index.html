@@ -3,49 +3,43 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Peijie (Max) Ma | NYU Tandon</title>
+    <title>Peijie (Max) Ma | LN4 Style</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap"
         rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <div id="cursor-dot"></div>
+    <div id="cursor-outline"></div>
 
     <section class="hero-section reveal-on-scroll" id="identity-orbit-section">
         <div class="identity-orbit">
             <div class="orbit-ring ring-outer"></div>
             <div class="orbit-ring ring-inner"></div>
 
-            <div class="orbit-object item-1" title="6G Wireless Research">
+            <div class="orbit-object item-1" title="6G Wireless">
                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path d="M12 2a10 10 0 0 1 10 10M2 12a10 10 0 0 1 10-10"></path>
-                    <path d="M12 6a6 6 0 0 1 6 6M6 12a6 6 0 0 1 6-6"></path>
                     <line x1="12" y1="22" x2="12" y2="22"></line>
                 </svg>
             </div>
-            <div class="orbit-object item-2" title="Full Stack & Ray Tracing">
+            <div class="orbit-object item-2" title="Ray Tracing">
                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <polyline points="16 18 22 12 16 6"></polyline>
                     <polyline points="8 6 2 12 8 18"></polyline>
                 </svg>
             </div>
-            <div class="orbit-object item-3" title="Skiing & Climbing">
+            <div class="orbit-object item-3" title="Skiing">
                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path d="M12 2L2 22h20L12 2z"></path>
-                </svg>
-            </div>
-            <div class="orbit-object item-4" title="New York, USA">
-                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                    <circle cx="12" cy="10" r="3"></circle>
                 </svg>
             </div>
 
@@ -53,38 +47,55 @@
                 <div class="id-avatar-placeholder">PM</div>
                 <div class="id-info">
                     <h1 class="id-name">Peijie Ma</h1>
-                    <p class="id-role">6G Architect & Researcher</p>
+                    <p class="id-role">6G Architect // NYU</p>
                     <div class="id-divider"></div>
                     <div class="id-socials">
-                        <a href="assets/cv.pdf">CV</a>
-                        <a href="mailto:pm3688@nyu.edu">Email</a>
+                        <a href="assets/cv.pdf">TELEMETRY (CV)</a>
+                        <a href="mailto:pm3688@nyu.edu">COMMS (EMAIL)</a>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="hero-content">
-            <p class="intro-label">Welcome to my Digital Twin</p>
+            <p class="intro-label">/// EST. 2025 ///</p>
             <h2 class="hero-bio-large">
-                Bridging <span style="color:var(--accent-color)">Physical Reality</span><br>
-                with High-Fidelity <span style="color:var(--accent-color)">Ray Tracing</span>.
+                Bridging <span class="highlight-neon">Physical Reality</span><br>
+                with High-Fidelity <span class="highlight-orange">Ray Tracing</span>.
             </h2>
             <p class="hero-bio-sub">
-                Focusing on 6G Wireless, Digital Twins, and Computational Physics at <strong>NYU Tandon</strong>.
+                Deploying 6G Wireless Digital Twins at <strong>NYU Tandon</strong>.
             </p>
             <div class="btn-group">
-                <a href="#publications-container" class="btn-primary">View Publications</a>
-                <a href="https://github.com/Lo-MA-hub" class="btn-text">Check Code &rarr;</a>
+                <a href="#publications-container" class="btn-primary">View Data</a>
+                <a href="https://github.com/Lo-MA-hub" class="btn-text">Source Code &rarr;</a>
             </div>
         </div>
     </section>
+
+    <div class="marquee-container">
+        <div class="marquee-content">
+            <span>6G WIRELESS</span><span class="stroke">///</span>
+            <span>RAY TRACING</span><span class="stroke">///</span>
+            <span>DIGITAL TWIN</span><span class="stroke">///</span>
+            <span>NYU TANDON</span><span class="stroke">///</span>
+            <span>FULL STACK</span><span class="stroke">///</span>
+        </div>
+        <div class="marquee-content" aria-hidden="true">
+            <span>6G WIRELESS</span><span class="stroke">///</span>
+            <span>RAY TRACING</span><span class="stroke">///</span>
+            <span>DIGITAL TWIN</span><span class="stroke">///</span>
+            <span>NYU TANDON</span><span class="stroke">///</span>
+            <span>FULL STACK</span><span class="stroke">///</span>
+        </div>
+    </div>
 
     <section class="analytics-section reveal-on-scroll" id="analytics-section">
         <div class="analytics-container">
             <div class="analytics-card time-card">
                 <div class="card-header">
-                    <h3 class="card-title">Time</h3>
-                    <p class="card-subtitle">This is how I spend my time. My biggest hobby is learning.</p>
+                    <h3 class="card-title">Performance Metrics</h3>
+                    <p class="card-subtitle">Time Allocation // Learning Curve</p>
                 </div>
                 <div class="chart-wrapper">
                     <canvas id="timeDistributionChart"></canvas>
@@ -93,17 +104,16 @@
 
             <div class="analytics-card space-card">
                 <div class="card-header">
-                    <h3 class="card-title">Space</h3>
-                    <p class="card-subtitle">Travel footprint. Based in <strong>New York, USA</strong>.</p>
+                    <h3 class="card-title">Track Location</h3>
+                    <p class="card-subtitle">Base: <strong>New York, USA</strong></p>
                 </div>
                 <div class="map-visualizer">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Blank_US_Map_%28states_only%29.svg/1280px-Blank_US_Map_%28states_only%29.svg.png"
-                        class="map-image" alt="Map">
+                        class="map-image" alt="Map" style="filter: invert(1) opacity(0.5);">
                     <div class="location-marker nyc-marker">
-                        <div class="marker-dot"><img src="assets/avatar.jpg" class="marker-avatar"
-                                onerror="this.style.display='none'"></div>
+                        <div class="marker-dot"></div>
                         <div class="marker-pulse"></div>
-                        <div class="marker-label">New York (Living)</div>
+                        <div class="marker-label">NYC /// HQ</div>
                     </div>
                 </div>
             </div>
@@ -121,8 +131,7 @@
                         <span class="project-year">2024</span>
                     </div>
                     <p class="project-desc">
-                        A high-fidelity ray tracing simulator for 6G wireless propagation, calibrated with real-world
-                        channel measurements in FR3 bands.
+                        High-fidelity ray tracing for 6G propagation. Calibrated with real-world FR3 measurements.
                     </p>
                     <div class="project-tags">
                         <span class="tag">C++</span>
@@ -139,8 +148,7 @@
                         <span class="project-year">2023</span>
                     </div>
                     <p class="project-desc">
-                        Creating precise 3D digital twins of urban environments (NYC/Brooklyn) to predict wireless
-                        coverage and sensing capabilities.
+                        Precise 3D digital twins of Brooklyn to predict wireless coverage and sensing capabilities.
                     </p>
                     <div class="project-tags">
                         <span class="tag">Blender</span>
@@ -157,7 +165,7 @@
                         <span class="project-year">Ongoing</span>
                     </div>
                     <p class="project-desc">
-                        Hardware experimentation and data processing for sub-THz and mmWave channel sounding systems.
+                        Hardware experimentation and data processing for sub-THz and mmWave systems.
                     </p>
                     <div class="project-tags">
                         <span class="tag">Matlab</span>
@@ -170,22 +178,40 @@
     </section>
 
     <div class="container reveal-on-scroll" style="margin-bottom: 6rem;">
-        <h2 class="section-title">Selected Publications</h2>
+        <h2 class="section-title">Publication Data</h2>
         <div id="publications-container">
-            <p style="color:var(--text-secondary);">Loading publications...</p>
+            <p style="color:var(--text-secondary);">Initializing Data Stream...</p>
         </div>
     </div>
 
     <footer class="container">
-        <div>&copy; 2025 Peijie Ma. Built with 6G Speed.</div>
-        <div>New York, NY</div>
+        <div style="font-family: 'Space Grotesk'; text-transform: uppercase;">&copy; 2025 Peijie Ma. // 6G Speed.</div>
+        <div style="font-size: 0.8rem; opacity: 0.5;">NYU TANDON // NEW YORK</div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/gh/ORCID/bibtexParseJs/bibtexParse.min.js"></script>
-
     <script src="publications.js"></script>
 
     <script>
+        // --- Custom Cursor Logic ---
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorOutline = document.getElementById('cursor-outline');
+
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            // Dot moves instantly
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+
+            // Outline follows with lag for "speed" feel
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 400, fill: "forwards" });
+        });
+
         // --- Scroll Reveal ---
         const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
         const observer = new IntersectionObserver((entries) => {
@@ -198,36 +224,49 @@
         }, observerOptions);
         document.querySelectorAll('.reveal-on-scroll').forEach((el) => observer.observe(el));
 
-        // --- Chart.js Configuration (Stacked Area) ---
+        // --- Chart.js Configuration (Neon Theme) ---
         const ctx = document.getElementById('timeDistributionChart').getContext('2d');
-        const colorStudy = 'rgba(200, 200, 200, 0.4)';
-        const colorGame = 'rgba(255, 159, 64, 0.5)';
-        const colorCoding = 'rgba(42, 42, 42, 0.85)';
+
+        // New Palette: Neon, Orange, White
+        const colorStudy = 'rgba(255, 255, 255, 0.1)';
+        const colorGame = 'rgba(255, 135, 0, 0.4)'; // McLaren Orange
+        const colorCoding = 'rgba(204, 255, 0, 0.8)'; // Lando Neon
         const colorMusic = 'rgba(100, 100, 100, 0.3)';
-        const colorSocial = 'rgba(200, 107, 64, 0.7)';
+        const colorSocial = 'rgba(255, 255, 255, 0.4)';
 
         new Chart(ctx, {
             type: 'line',
             data: {
                 labels: ['5y', '10y', '14y', '18y', '22y', '24y', 'Now'],
                 datasets: [
-                    { label: 'Study', data: [80, 70, 60, 45, 15, 10, 5], backgroundColor: colorStudy, borderColor: 'transparent', fill: true, tension: 0.4 },
-                    { label: 'Game', data: [10, 20, 30, 20, 10, 5, 5], backgroundColor: colorGame, borderColor: 'transparent', fill: true, tension: 0.4 },
-                    { label: 'Coding & Research', data: [0, 0, 5, 15, 45, 55, 60], backgroundColor: colorCoding, borderColor: 'transparent', fill: true, tension: 0.4 },
-                    { label: 'Music/Art', data: [0, 5, 0, 5, 10, 10, 10], backgroundColor: colorMusic, borderColor: 'transparent', fill: true, tension: 0.4 },
-                    { label: 'Social & Family', data: [10, 5, 5, 15, 20, 20, 20], backgroundColor: colorSocial, borderColor: 'transparent', fill: true, tension: 0.4 }
+                    { label: 'Study', data: [80, 70, 60, 45, 15, 10, 5], backgroundColor: colorStudy, borderColor: 'transparent', fill: true, tension: 0.2 },
+                    { label: 'Game', data: [10, 20, 30, 20, 10, 5, 5], backgroundColor: colorGame, borderColor: 'transparent', fill: true, tension: 0.2 },
+                    { label: 'Coding', data: [0, 0, 5, 15, 45, 55, 60], backgroundColor: colorCoding, borderColor: 'transparent', fill: true, tension: 0.2 },
+                    { label: 'Music', data: [0, 5, 0, 5, 10, 10, 10], backgroundColor: colorMusic, borderColor: 'transparent', fill: true, tension: 0.2 },
+                    { label: 'Social', data: [10, 5, 5, 15, 20, 20, 20], backgroundColor: colorSocial, borderColor: 'transparent', fill: true, tension: 0.2 }
                 ]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
-                    legend: { position: 'bottom', labels: { boxWidth: 10, usePointStyle: true, font: { family: 'Inter', size: 11 } } },
-                    tooltip: { mode: 'index', intersect: false, backgroundColor: '#2A2A2A', titleColor: '#fff', bodyFont: { family: 'Inter' }, padding: 10, cornerRadius: 8 }
+                    legend: { display: false },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        backgroundColor: '#111',
+                        titleColor: '#ccff00',
+                        bodyColor: '#fff',
+                        borderColor: '#333',
+                        borderWidth: 1
+                    }
                 },
                 scales: {
                     y: { stacked: true, display: false, min: 0, max: 100 },
-                    x: { grid: { display: false }, ticks: { color: '#888', font: { family: 'Space Grotesk', size: 10 } } }
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#666', font: { family: 'Space Grotesk', size: 10 } }
+                    }
                 },
                 elements: { point: { radius: 0, hitRadius: 20 } }
             }

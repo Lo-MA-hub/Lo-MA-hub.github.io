@@ -1,120 +1,682 @@
-/* =========================================
-   6. PROJECTS GRID STYLE (Tech Upgrade)
-   ========================================= */
-.project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 24px;
-    margin-top: 24px;
+:root {
+    /* --- LN4 / McLaren 2025 Palette --- */
+    --bg-color: #050505;
+    /* Deep Carbon */
+    --card-bg: #111111;
+    /* Matte Black */
+    --text-primary: #ffffff;
+    --text-secondary: #888888;
+
+    /* The Speed Colors */
+    --lando-neon: #ccff00;
+    /* Volt Yellow */
+    --mclaren-orange: #FF8700;
+    /* Papaya Orange */
+
+    /* Design Language */
+    --skew-degree: -6deg;
+    /* The angle of speed */
+    --font-heading: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
 }
 
-.project-card {
-    /* 基础玻璃拟态 */
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    cursor: none;
+    /* Hide default cursor for custom one */
+}
 
-    border-radius: 16px;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    padding: 28px;
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
 
+a {
+    text-decoration: none;
+    color: inherit;
+    cursor: none;
+}
+
+/* --- TYPOGRAPHY --- */
+h1,
+h2,
+h3,
+h4 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-style: italic;
+    /* Speed Italic */
+    letter-spacing: -0.02em;
+}
+
+.highlight-neon {
+    color: var(--lando-neon);
+}
+
+.highlight-orange {
+    color: var(--mclaren-orange);
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* --- CUSTOM CURSOR --- */
+#cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--lando-neon);
+    border-radius: 50%;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+}
+
+#cursor-outline {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 9998;
+    transition: width 0.2s, height 0.2s, background-color 0.2s;
+}
+
+/* Interactive Cursor State */
+body:has(a:hover) #cursor-outline,
+body:has(.project-card:hover) #cursor-outline {
+    width: 60px;
+    height: 60px;
+    border-color: var(--mclaren-orange);
+    background: rgba(255, 135, 0, 0.1);
+}
+
+/* --- HERO SECTION --- */
+.hero-section {
+    min-height: 90vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     position: relative;
+    padding-top: 4rem;
+}
+
+.hero-bio-large {
+    font-size: 3rem;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    margin-top: 2rem;
+}
+
+.hero-bio-sub {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin-bottom: 2.5rem;
+}
+
+.intro-label {
+    font-family: var(--font-heading);
+    color: var(--lando-neon);
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+
+/* --- BUTTONS (SKEWED) --- */
+.btn-group {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.btn-primary {
+    background: var(--text-primary);
+    color: #000;
+    padding: 14px 32px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-transform: uppercase;
+    transform: skewX(var(--skew-degree));
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+}
+
+.btn-primary:hover {
+    background: var(--lando-neon);
+    box-shadow: 0 0 20px rgba(204, 255, 0, 0.4);
+    transform: skewX(var(--skew-degree)) translateY(-2px);
+}
+
+.btn-text {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--text-secondary);
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.btn-text:hover {
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--mclaren-orange);
+}
+
+/* --- IDENTITY ORBIT (TELEMETRY STYLE) --- */
+.identity-orbit {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    margin-bottom: 20px;
+}
+
+.orbit-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 1px dashed rgba(255, 255, 255, 0.15);
+    /* Dashed for telemetry look */
+}
+
+.ring-outer {
+    width: 100%;
+    height: 100%;
+    animation: spin 20s linear infinite;
+    border-color: rgba(255, 135, 0, 0.3);
+}
+
+.ring-inner {
+    width: 70%;
+    height: 70%;
+    animation: spin 15s linear infinite reverse;
+    border-color: rgba(204, 255, 0, 0.3);
+}
+
+.orbit-object {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    background: #000;
+    border: 1px solid var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+    transition: all 0.3s;
+}
+
+/* Placing objects on the ring */
+.item-1 {
+    transform: translate(-50%, -50%) rotate(0deg) translate(140px) rotate(0deg);
+    animation: orbit1 20s linear infinite;
+}
+
+.item-2 {
+    transform: translate(-50%, -50%) rotate(120deg) translate(140px) rotate(-120deg);
+    animation: orbit2 20s linear infinite;
+}
+
+.item-3 {
+    transform: translate(-50%, -50%) rotate(240deg) translate(140px) rotate(-240deg);
+    animation: orbit3 20s linear infinite;
+}
+
+.id-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--card-bg);
+    border: 1px solid #333;
+    padding: 15px;
+    width: 180px;
+    text-align: center;
+    z-index: 2;
+    /* Glitchy/Tech Clip Path */
+    clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%);
+}
+
+.id-avatar-placeholder {
+    width: 60px;
+    height: 60px;
+    background: #222;
+    color: var(--lando-neon);
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.2rem;
+    border: 1px solid var(--lando-neon);
+}
+
+.id-name {
+    font-size: 1rem;
+    margin: 0;
+    color: #fff;
+    font-style: normal;
+}
+
+.id-role {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.id-divider {
+    height: 1px;
+    background: #333;
+    margin: 8px 0;
+}
+
+.id-socials {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    font-size: 0.65rem;
+}
+
+.id-socials a {
+    color: var(--mclaren-orange);
+    font-weight: bold;
+}
+
+@keyframes spin {
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes orbit1 {
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg) translate(140px) rotate(-360deg);
+    }
+}
+
+@keyframes orbit2 {
+    100% {
+        transform: translate(-50%, -50%) rotate(480deg) translate(140px) rotate(-480deg);
+    }
+}
+
+@keyframes orbit3 {
+    100% {
+        transform: translate(-50%, -50%) rotate(600deg) translate(140px) rotate(-600deg);
+    }
+}
+
+/* --- INFINITE MARQUEE --- */
+.marquee-container {
+    background: var(--lando-neon);
+    color: #000;
     overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    z-index: 1;
+    white-space: nowrap;
+    position: relative;
+    transform: rotate(-2deg) scale(1.05);
+    /* Dynamic slant */
+    padding: 1rem 0;
+    margin: 4rem 0 6rem 0;
+    border-top: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    z-index: 10;
 }
 
-/* 悬停时的 3D 上浮与发光 */
-.project-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1),
-        0 0 0 2px var(--accent-color);
-    /* 模拟高亮边框 */
-    border-color: transparent;
+.marquee-content {
+    display: inline-block;
+    animation: scroll-left 15s linear infinite;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 3.5rem;
+    font-style: italic;
+    line-height: 1;
 }
 
-/* --- 酷炫特效：背景中的科技网格点缀 --- */
-.project-card::before {
+.marquee-content span {
+    margin: 0 1.5rem;
+}
+
+.stroke {
+    color: transparent;
+    -webkit-text-stroke: 1px #000;
+}
+
+@keyframes scroll-left {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+/* --- ANALYTICS CARDS (GRID) --- */
+.analytics-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    max-width: 1000px;
+    margin: 0 auto 4rem;
+    padding: 0 24px;
+}
+
+.analytics-card {
+    background: var(--card-bg);
+    border: 1px solid #333;
+    padding: 24px;
+    height: 300px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Decorate the cards with "Corners" */
+.analytics-card::after {
     content: "";
     position: absolute;
     top: 0;
     right: 0;
-    width: 150px;
-    height: 150px;
-    background-image: radial-gradient(var(--accent-color) 1px, transparent 1px);
-    background-size: 10px 10px;
-    opacity: 0.1;
-    mask-image: radial-gradient(circle at top right, black, transparent 70%);
-    transition: opacity 0.3s ease;
-    pointer-events: none;
+    width: 20px;
+    height: 20px;
+    border-top: 2px solid var(--lando-neon);
+    border-right: 2px solid var(--lando-neon);
 }
 
-.project-card:hover::before {
-    opacity: 0.25;
-    /* 悬停时网格变明显 */
+.card-title {
+    font-size: 1.1rem;
+    color: #fff;
+    margin-bottom: 5px;
 }
 
-/* --- 内容样式 --- */
+.card-subtitle {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.chart-wrapper {
+    flex: 1;
+    position: relative;
+    width: 100%;
+    margin-top: 15px;
+}
+
+/* Map Styling */
+.map-visualizer {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.map-image {
+    width: 80%;
+    opacity: 0.6;
+}
+
+.location-marker {
+    position: absolute;
+    top: 40%;
+    left: 78%;
+    /* Approx NYC */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.marker-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--lando-neon);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--lando-neon);
+}
+
+.marker-pulse {
+    position: absolute;
+    top: -11px;
+    left: -11px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--lando-neon);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+    opacity: 0;
+}
+
+.marker-label {
+    margin-top: 5px;
+    background: #000;
+    padding: 2px 5px;
+    font-size: 0.6rem;
+    color: #fff;
+    border: 1px solid #333;
+    white-space: nowrap;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.5);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* --- PROJECT CARDS (RACING STYLE) --- */
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    border-left: 5px solid var(--mclaren-orange);
+    padding-left: 20px;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.project-card {
+    background: linear-gradient(145deg, #111 0%, #080808 100%);
+    border: 1px solid #333;
+    border-left: 4px solid var(--text-secondary);
+    /* Default idle color */
+    padding: 30px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    /* THE SKEW */
+    transform: skewX(var(--skew-degree));
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Un-skew content so it reads normally */
+.project-content {
+    transform: skewX(6deg);
+}
+
+.project-card:hover {
+    border-left-color: var(--lando-neon);
+    transform: skewX(var(--skew-degree)) translateX(10px) translateY(-10px);
+    box-shadow: -10px 10px 30px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(145deg, #161616 0%, #0a0a0a 100%);
+}
+
 .project-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #222;
+    padding-bottom: 10px;
 }
 
 .project-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    font-family: 'Space Grotesk', sans-serif;
-    /* 强调科技字体 */
-    letter-spacing: -0.02em;
+    font-size: 1.4rem;
+    color: #fff;
 }
 
 .project-year {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: var(--accent-color);
-    border: 1px solid var(--accent-color);
-    padding: 2px 8px;
-    border-radius: 4px;
-    background: rgba(var(--accent-rgb), 0.05);
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: #000;
+    background: var(--mclaren-orange);
+    padding: 2px 6px;
+    font-style: italic;
 }
 
 .project-desc {
     font-size: 0.95rem;
-    color: var(--text-secondary);
-    margin-bottom: 24px;
-    line-height: 1.6;
+    color: #aaa;
+    margin-bottom: 20px;
     flex-grow: 1;
 }
 
-/* --- 标签升级 --- */
 .project-tags {
     display: flex;
-    flex-wrap: wrap;
     gap: 8px;
+    flex-wrap: wrap;
 }
 
 .tag {
     font-size: 0.7rem;
-    color: #555;
-    background: #f0f2f5;
-    padding: 6px 12px;
-    border-radius: 6px;
+    color: var(--lando-neon);
+    border: 1px solid #333;
+    padding: 4px 8px;
+    text-transform: uppercase;
     font-weight: 600;
-    transition: all 0.2s ease;
-    border: 1px solid transparent;
 }
 
-/* 悬停卡片时，标签也稍微变色 */
 .project-card:hover .tag {
+    border-color: var(--lando-neon);
+    background: rgba(204, 255, 0, 0.05);
+}
+
+/* --- PUBLICATIONS LIST STYLING --- */
+/* Since this is injected by JS, we style the classes here */
+.pub-section h3 {
+    color: var(--mclaren-orange) !important;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+    margin-top: 3rem !important;
+}
+
+.pub-entry {
+    margin-bottom: 1.5rem;
+    padding-left: 15px;
+    border-left: 2px solid #333;
+    transition: 0.2s;
+}
+
+.pub-entry:hover {
+    border-left-color: var(--lando-neon);
+    padding-left: 25px;
+    /* Slide effect */
+}
+
+.pub-title {
+    font-weight: 700;
+    color: #fff;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.pub-authors {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.pub-authors strong {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--mclaren-orange);
+}
+
+.pub-meta {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 4px;
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+}
+
+.pub-links a {
+    font-size: 0.75rem;
+    color: #000;
     background: #fff;
-    border-color: #ddd;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    padding: 1px 6px;
+    margin-right: 5px;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 5px;
+    transform: skewX(-10deg);
+}
+
+.pub-links a:hover {
+    background: var(--lando-neon);
+}
+
+/* --- ANIMATIONS --- */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+    /* Mechanical easing */
+}
+
+.reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .marquee-content {
+        font-size: 2rem;
+    }
+
+    .hero-bio-large {
+        font-size: 2rem;
+    }
+
+    .project-card {
+        transform: skewX(0);
+    }
+
+    /* Remove skew on mobile for readability */
+    .project-content {
+        transform: skewX(0);
+    }
+
+    .btn-primary {
+        transform: skewX(0);
+    }
 }

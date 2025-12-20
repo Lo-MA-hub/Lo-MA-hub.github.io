@@ -1,484 +1,120 @@
 /* =========================================
-   1. Animation Utilities (The "qzq.at" Vibe)
+   1. CORE VARIABLES (Warm Editorial Theme)
    ========================================= */
-
-/* 初始状态：隐藏并下移 */
-.reveal-on-scroll {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    /*非常顺滑的贝塞尔曲线*/
-    will-change: transform, opacity;
-}
-
-/* 激活状态：回到原位 */
-.reveal-on-scroll.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* 错峰显示：让元素一个接一个出来，而不是同时出来 */
-.delay-100 {
-    transition-delay: 0.1s;
-}
-
-.delay-200 {
-    transition-delay: 0.2s;
-}
-
-.delay-300 {
-    transition-delay: 0.3s;
-}
-
-/* =========================================
-   2. Enhanced Project Cards (Tech Style)
-   ========================================= */
-
-.project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    /*稍微宽一点*/
-    gap: 24px;
-}
-
-.project-card {
-    background: linear-gradient(145deg, #1a1c20 0%, #121315 100%);
-    /* 微妙的渐变 */
-    padding: 28px;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    position: relative;
-    overflow: hidden;
-    transition: all 0.4s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-/* Hover Effect: McLaren Orange Glow */
-.project-card:hover {
-    border-color: var(--accent);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px -10px rgba(255, 128, 0, 0.15);
-    /* 橙色光晕 */
-}
-
-.project-card h3 {
-    margin-top: 0;
-    font-size: 1.25rem;
-    color: #fff;
-    margin-bottom: 12px;
-}
-
-.project-desc {
-    color: var(--text-muted);
-    font-size: 0.95rem;
-    margin-bottom: 20px;
-    flex-grow: 1;
-}
-
-/* Tech Tags (e.g., C++, Python) */
-.tech-stack {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: auto;
-    /* Push to bottom */
-}
-
-.tech-tag {
-    font-family: "Space Grotesk", monospace;
-    /* 科技感字体 */
-    font-size: 0.75rem;
-    color: var(--accent);
-    background: rgba(255, 128, 0, 0.1);
-    padding: 4px 10px;
-    border-radius: 4px;
-    border: 1px solid rgba(255, 128, 0, 0.2);
-}
-
-/* Link icon overlay */
-.project-link-icon {
-    position: absolute;
-    top: 24px;
-    right: 24px;
-    color: var(--text-muted);
-    opacity: 0;
-    transition: 0.3s;
-    transform: translate(-10px, 10px);
-}
-
-.project-card:hover .project-link-icon {
-    opacity: 1;
-    transform: translate(0, 0);
-    color: var(--accent);
-}
-
-/* =========================================
-   3. Custom Scrollbar (Polished look)
-   ========================================= */
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--bg-color);
-}
-
-::-webkit-scrollbar-thumb {
-    background: #333;
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--accent);
-}
-
-/* =========================================
-   4. Stats & Charts Section
-   ========================================= */
-
-.stats-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    /* 左边图表宽，右边地图窄，模仿原图比例 */
-    gap: 24px;
-}
-
-@media (max-width: 768px) {
-    .stats-grid {
-        grid-template-columns: 1fr;
-        /* 手机端单列 */
-    }
-}
-
-.stats-card {
-    background: var(--card-bg);
-    /* 深灰色背景 */
-    padding: 24px;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    position: relative;
-    overflow: hidden;
-}
-
-.stats-card h3 {
-    margin-top: 0;
-    font-size: 1.1rem;
-    color: #fff;
-    margin-bottom: 8px;
-}
-
-.stats-desc {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    margin-bottom: 20px;
-    line-height: 1.4;
-}
-
-.chart-wrapper {
-    position: relative;
-    height: 300px;
-    /* 固定高度确保图表显示 */
-    width: 100%;
-}
-
-/* 简单的地图占位符样式 */
-.map-placeholder {
-    height: 300px;
-    background: radial-gradient(circle at center, #2a2d35 0%, #1a1c20 100%);
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-muted);
-    font-family: var(--font-heading);
-}
-
-.map-dot {
-    width: 16px;
-    height: 16px;
-    background: var(--accent);
-    border-radius: 50%;
-    box-shadow: 0 0 15px var(--accent);
-    margin-bottom: 12px;
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-        opacity: 1;
-    }
-
-    50% {
-        transform: scale(1.5);
-        opacity: 0.5;
-    }
-
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-/* =========================================
-   5. Identity Orbit Section (Experimental)
-   ========================================= */
-
-/* =========================================
-   Identity Orbit: Color Harmony Refinement
-   ========================================= */
-
-#identity-orbit {
-    /* --- Local Palette Definition --- */
-    /* Backgrounds: Calm & Clean */
-    --id-bg: #fafafa;
-    /* Very light off-white for section */
-    --id-card-bg: #ffffff;
-    /* Pure white for the card */
-
-    /* Typography: Neutral & Readable */
-    --id-text-main: #2d3436;
-    /* Soft charcoal (not harsh black) */
-    --id-text-muted: #95a5a6;
-    /* Lighter gray for labels */
-
-    /* Accents: "Sunset & Steel" */
-    --id-accent-primary: #e6955c;
-    /* Soft Muted Orange (Your Name) */
-    --id-accent-secondary: #7faeb5;
-    /* Desaturated Teal/Blue (Tech elements) */
-
-    /* Structure */
-    --id-orbit-line: rgba(0, 0, 0, 0.04);
-    /* Extremely subtle orbit paths */
-    --id-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
-    /* Diffused, elegant shadow */
-
-    /* Apply Background */
-    background-color: var(--id-bg);
-    color: var(--id-text-main);
-}
-
-/* --- Card Refinements --- */
-.id-card {
-    background: var(--id-card-bg);
-    box-shadow: var(--id-shadow);
-    /* Remove harsh borders, use subtle definition */
-    border: 1px solid rgba(0, 0, 0, 0.02);
-    backdrop-filter: none;
-    /* Removed blur for a crisper academic look */
-}
-
-/* --- Typography Hierarchy --- */
-.id-label {
-    color: var(--id-text-muted);
-    font-weight: 500;
-    font-size: 0.75rem;
-    /* Slightly smaller for elegance */
-    letter-spacing: 1.5px;
-}
-
-.id-name {
-    /* The Hero Element */
-    color: var(--id-accent-primary);
-    text-shadow: none;
-    /* Clean flat look */
-    opacity: 1;
-    /* Optional: subtle gradient for the text itself */
-    background: -webkit-linear-gradient(45deg, var(--id-accent-primary), #f0ad4e);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.id-roles li {
-    color: var(--id-text-main);
-    font-weight: 400;
-    /* Lighter weight */
-}
-
-.id-divider {
-    /* Soft gradient using the Secondary accent */
-    background: linear-gradient(90deg, transparent, var(--id-accent-secondary), transparent);
-    opacity: 0.3;
-    /* Very subtle */
-}
-
-/* --- Orbit & Element Refinements --- */
-.orbit-ring {
-    border-color: var(--id-orbit-line);
-    border-style: dashed;
-}
-
-.ring-inner {
-    /* Inner ring gets a tiny hint of the secondary color */
-    border-color: rgba(127, 174, 181, 0.15);
-}
-
-.orbit-object {
-    background: var(--id-card-bg);
-    /* Icons use the Secondary Accent (Blue/Teal) */
-    color: var(--id-accent-secondary);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-/* Interaction: Hovering an icon warms it up to Primary color */
-.orbit-object:hover {
-    color: var(--id-accent-primary);
-    transform: scale(1.1);
-    transition: all 0.3s ease;
-}
-
-/* =========================================
-   Landon Norris Inspired Hero Theme
-   ========================================= */
-
 :root {
-    /* New Palette: Warm & Editorial */
-    --bg-color: #F7F7F5;
-    /* Warm stone/paper background */
+    /* Palette */
+    --bg-color: #F2F0EC;
+    /* Warm Paper / Stone */
+    --card-bg: #FFFFFF;
+    /* Pure White */
     --text-primary: #2A2A2A;
     /* Soft Charcoal */
     --text-secondary: #5C5C5C;
-    /* Medium Grey */
-    --accent-warm: #C86B40;
-    /* Burnt Sienna / Muted Orange */
-    --line-color: rgba(0, 0, 0, 0.08);
-    /* Very subtle dividers */
+    /* Muted Grey */
+    --text-light: #888888;
+    /* Light Grey labels */
+    --accent-color: #C86B40;
+    /* Burnt Sienna / Terracotta */
+    --accent-subtle: rgba(200, 107, 64, 0.1);
+    --border-color: rgba(0, 0, 0, 0.06);
+    --divider-color: rgba(0, 0, 0, 0.08);
+
+    /* Typography */
     --font-heading: 'Space Grotesk', sans-serif;
     --font-body: 'Inter', sans-serif;
+}
+
+/* =========================================
+   2. GLOBAL RESET & BASE STYLES
+   ========================================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
     background-color: var(--bg-color);
     color: var(--text-primary);
-}
-
-/* --- Layout Container --- */
-.identity-wrapper {
-    position: relative;
-    min-height: 85vh;
-    /* Takes up most of the screen */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    /* Left aligned like editorial sites */
-    padding: 0 10%;
-    /* Generous horizontal whitespace */
-    overflow: hidden;
-}
-
-/* --- Typography Hierarchy --- */
-.intro-label {
     font-family: var(--font-body);
-    font-size: 1rem;
-    color: var(--accent-warm);
-    font-weight: 500;
-    margin-bottom: 1rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-}
-
-.main-name {
-    font-family: var(--font-heading);
-    font-size: clamp(3rem, 6vw, 5rem);
-    /* Responsive giant text */
-    font-weight: 600;
-    line-height: 1.1;
-    color: var(--text-primary);
-    margin: 0;
-    letter-spacing: -0.02em;
-    /* Tight tracking for modern look */
-}
-
-.title-separator {
-    width: 60px;
-    height: 3px;
-    background-color: var(--accent-warm);
-    margin: 2rem 0;
-}
-
-.main-bio {
-    font-family: var(--font-body);
-    font-size: 1.25rem;
     line-height: 1.6;
-    color: var(--text-secondary);
-    max-width: 600px;
-    margin-bottom: 2.5rem;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
 }
 
-.main-bio strong {
-    color: var(--text-primary);
-    font-weight: 600;
-}
-
-.highlight {
-    color: var(--accent-warm);
-}
-
-/* --- Minimalist Buttons --- */
-.links-row {
-    display: flex;
-    gap: 2rem;
-}
-
-.btn-minimal {
+a {
     text-decoration: none;
+    color: inherit;
+    transition: 0.3s;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* Scroll Reveal Animation */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
+}
+
+.reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Typography */
+h1,
+h2,
+h3 {
+    font-family: var(--font-heading);
     color: var(--text-primary);
-    font-family: var(--font-body);
-    font-weight: 500;
-    font-size: 1rem;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--divider-color);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+/* =========================================
+   3. HERO: RICH IDENTITY ORBIT
+   ========================================= */
+#identity-orbit-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 85vh;
+    padding-top: 40px;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* Orbit Container */
+.identity-orbit {
     position: relative;
-    transition: color 0.3s ease;
+    width: 500px;
+    height: 500px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Subtle underline animation */
-.btn-minimal::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 1px;
-    background: var(--accent-warm);
-    bottom: -4px;
-    left: 0;
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.3s ease;
-}
-
-.btn-minimal:hover {
-    color: var(--accent-warm);
-}
-
-.btn-minimal:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
-}
-
-/* --- The Ambient Background Orbit --- */
-/* This replaces the busy icons with pure geometry */
-.ambient-orbit {
-    position: absolute;
-    top: 50%;
-    right: -10%;
-    /* Positioned off-screen to the right */
-    transform: translateY(-50%);
-    width: 600px;
-    height: 600px;
-    pointer-events: none;
-    /* Just for looks */
-    opacity: 0.6;
-    z-index: -1;
-}
-
+/* Rings */
 .orbit-ring {
     position: absolute;
     border-radius: 50%;
-    border: 1px dashed var(--line-color);
+    border: 1px dashed rgba(0, 0, 0, 0.1);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -487,77 +123,302 @@ body {
 .ring-outer {
     width: 100%;
     height: 100%;
-    animation: spin 60s linear infinite;
+    animation: spin-right 60s linear infinite;
 }
 
 .ring-inner {
-    width: 60%;
-    height: 60%;
-    animation: spin 40s linear infinite reverse;
+    width: 65%;
+    height: 65%;
     border-style: solid;
-    /* Inner ring is solid for contrast */
-    border-width: 1px;
+    border-color: rgba(200, 107, 64, 0.1);
+    animation: spin-left 40s linear infinite;
 }
 
-.orbit-electron {
+/* Center Card */
+.id-card {
     position: absolute;
-    width: 12px;
-    height: 12px;
-    background-color: var(--accent-warm);
-    border-radius: 50%;
-    top: 0;
-    left: 50%;
-    transform-origin: 0 300px;
-    /* Orbit radius matches outer ring */
-    animation: orbit-rotate 20s linear infinite;
-    box-shadow: 0 0 15px rgba(217, 112, 64, 0.4);
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 24px 32px;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    text-align: center;
+    transition: transform 0.3s ease;
 }
 
-@keyframes spin {
+.id-card:hover {
+    transform: scale(1.02);
+}
+
+.id-avatar-placeholder {
+    width: 60px;
+    height: 60px;
+    background: var(--accent-color);
+    color: white;
+    border-radius: 50%;
+    line-height: 60px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0 auto 12px;
+}
+
+.id-name {
+    font-size: 1.4rem;
+    margin-bottom: 4px;
+    color: var(--text-primary);
+}
+
+.id-role {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.id-divider {
+    height: 1px;
+    background: rgba(0, 0, 0, 0.05);
+    margin: 12px 0;
+}
+
+.id-socials a {
+    font-size: 0.85rem;
+    margin: 0 8px;
+    font-weight: 500;
+    color: var(--accent-color);
+}
+
+/* Orbit Objects (Satellites) */
+.orbit-object {
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    top: 50%;
+    left: 50%;
+    animation: orbit-float 20s linear infinite;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.orbit-object:hover {
+    color: var(--accent-color);
+    transform: scale(1.2) !important;
+    z-index: 20;
+}
+
+/* Orbit Animations & Positions */
+.item-1 {
+    animation: orbit-1 40s linear infinite;
+}
+
+.item-2 {
+    animation: orbit-2 50s linear infinite;
+}
+
+.item-3 {
+    animation: orbit-3 45s linear infinite;
+}
+
+.item-4 {
+    animation: orbit-4 60s linear infinite;
+}
+
+@keyframes spin-right {
     100% {
         transform: translate(-50%, -50%) rotate(360deg);
     }
 }
 
-@keyframes orbit-rotate {
-    0% {
-        transform: rotate(0deg) translateX(-50%);
-    }
-
+@keyframes spin-left {
     100% {
-        transform: rotate(360deg) translateX(-50%);
+        transform: translate(-50%, -50%) rotate(-360deg);
     }
 }
 
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-    .identity-wrapper {
-        padding: 0 5%;
-        min-height: 70vh;
+@keyframes orbit-1 {
+    from {
+        transform: rotate(0deg) translateX(250px) rotate(0deg);
     }
 
-    .ambient-orbit {
-        right: -30%;
-        opacity: 0.3;
+    to {
+        transform: rotate(360deg) translateX(250px) rotate(-360deg);
+    }
+}
+
+@keyframes orbit-2 {
+    from {
+        transform: rotate(120deg) translateX(180px) rotate(-120deg);
     }
 
-    .links-row {
-        gap: 1.5rem;
+    to {
+        transform: rotate(480deg) translateX(180px) rotate(-480deg);
+    }
+}
+
+@keyframes orbit-3 {
+    from {
+        transform: rotate(240deg) translateX(220px) rotate(-240deg);
+    }
+
+    to {
+        transform: rotate(600deg) translateX(220px) rotate(-600deg);
+    }
+}
+
+@keyframes orbit-4 {
+    from {
+        transform: rotate(180deg) translateX(120px) rotate(-180deg);
+    }
+
+    to {
+        transform: rotate(540deg) translateX(120px) rotate(-540deg);
+    }
+}
+
+/* Hero Text */
+.hero-content {
+    flex: 1;
+    padding-left: 20px;
+}
+
+.intro-label {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.hero-bio-large {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+.hero-bio-sub {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    max-width: 450px;
+}
+
+/* Buttons */
+.btn-group {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.btn-primary {
+    background: var(--text-primary);
+    color: #fff;
+    padding: 12px 28px;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.btn-primary:hover {
+    background: var(--accent-color);
+}
+
+.btn-text {
+    font-size: 1rem;
+    font-weight: 500;
+    border-bottom: 1px solid var(--accent-color);
+    padding-bottom: 2px;
+}
+
+.btn-text:hover {
+    color: var(--accent-color);
+}
+
+/* Responsive Hero */
+@media(max-width: 900px) {
+    #identity-orbit-section {
+        flex-direction: column-reverse;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .hero-content {
+        padding-left: 0;
+        margin-bottom: 40px;
+    }
+
+    .btn-group {
+        justify-content: center;
+    }
+
+    .identity-orbit {
+        width: 350px;
+        height: 350px;
+        transform: scale(0.9);
+    }
+
+    @keyframes orbit-1 {
+        from {
+            transform: rotate(0deg) translateX(175px) rotate(0deg);
+        }
+
+        to {
+            transform: rotate(360deg) translateX(175px) rotate(-360deg);
+        }
+    }
+
+    @keyframes orbit-2 {
+        from {
+            transform: rotate(120deg) translateX(130px) rotate(-120deg);
+        }
+
+        to {
+            transform: rotate(480deg) translateX(130px) rotate(-480deg);
+        }
+    }
+
+    @keyframes orbit-3 {
+        from {
+            transform: rotate(240deg) translateX(150px) rotate(-240deg);
+        }
+
+        to {
+            transform: rotate(600deg) translateX(150px) rotate(-600deg);
+        }
+    }
+
+    @keyframes orbit-4 {
+        from {
+            transform: rotate(180deg) translateX(90px) rotate(-180deg);
+        }
+
+        to {
+            transform: rotate(540deg) translateX(90px) rotate(-540deg);
+        }
     }
 }
 
 /* =========================================
-   TIME & SPACE ANALYTICS STYLE
+   4. ANALYTICS (Time & Space)
    ========================================= */
+.analytics-section {
+    padding: 40px 0;
+}
 
 .analytics-container {
     display: grid;
     grid-template-columns: 1.2fr 0.8fr;
-    /* 左边图表稍微宽一点 */
     gap: 32px;
     max-width: 1100px;
     margin: 0 auto;
-    padding: 60px 20px;
 }
 
 .analytics-card {
@@ -582,18 +443,15 @@ body {
     color: var(--text-secondary);
     line-height: 1.5;
     margin-bottom: 24px;
-    max-width: 90%;
 }
 
-/* --- Left: Chart Area --- */
 .chart-wrapper {
     flex-grow: 1;
     min-height: 300px;
-    position: relative;
     width: 100%;
 }
 
-/* --- Right: Space Map --- */
+/* Space Map Visuals */
 .space-card {
     position: relative;
     overflow: hidden;
@@ -603,43 +461,40 @@ body {
     position: relative;
     width: 100%;
     height: 300px;
-    /* 地图区域高度 */
     background: radial-gradient(circle at center, #fcfcfc 0%, #f2f0ec 100%);
-    /* 替代背景 */
     border-radius: 12px;
     border: 1px dashed rgba(0, 0, 0, 0.05);
+    overflow: hidden;
 }
 
 .map-image {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    /* 保持地图比例 */
-    transform: scale(0.9);
+    transform: scale(1.1);
+    opacity: 0.3;
+    filter: grayscale(100%);
 }
 
-/* 定位标记系统 */
+/* Location Markers */
 .location-marker {
     position: absolute;
-    /* 这里是针对美国地图的大概位置，你需要根据你的地图图片微调 top/left */
     top: 32%;
-    left: 88%;
+    left: 82%;
+    /* Adjusted for generic US Map image */
     transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
     align-items: center;
-    cursor: pointer;
     z-index: 10;
 }
 
-/* 头像圆点 */
 .marker-dot {
     width: 24px;
     height: 24px;
     background: var(--accent-color);
     border: 2px solid #fff;
     border-radius: 50%;
-    position: relative;
     z-index: 2;
     overflow: hidden;
 }
@@ -650,7 +505,6 @@ body {
     object-fit: cover;
 }
 
-/* 脉冲动画 */
 .marker-pulse {
     position: absolute;
     top: 50%;
@@ -690,7 +544,6 @@ body {
     }
 }
 
-/* 响应式：手机端上下排列 */
 @media (max-width: 768px) {
     .analytics-container {
         grid-template-columns: 1fr;
@@ -699,4 +552,54 @@ body {
     .map-visualizer {
         height: 250px;
     }
+}
+
+/* =========================================
+   5. PUBLICATIONS (Simple Styling)
+   ========================================= */
+.pub-entry {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--divider-color);
+}
+
+.pub-title {
+    display: block;
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.pub-authors {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+.pub-authors strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.pub-meta {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.pub-links a {
+    margin-right: 15px;
+    font-size: 0.85rem;
+    color: var(--accent-color);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* Footer */
+footer {
+    margin-top: 6rem;
+    padding: 3rem 0;
+    border-top: 1px solid var(--divider-color);
+    color: var(--text-light);
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
 }

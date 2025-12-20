@@ -21,9 +21,16 @@ function formatAuthors(authorStr) {
             const initials = parts.map(n => n[0] + ".").join(" ");
             return `${initials} ${last}`;
         }
+        const formatted = authorList.join(", ");
+        return highlightMyName(formatted);
 
-        return author;
     }).join(", ");
+}
+
+function highlightMyName(authorLine) {
+    return authorLine
+        .replace(/\bP\.?\s*Ma\b/g, "<strong>P. Ma</strong>")
+        .replace(/\bPeijie\s+Ma\b/g, "<strong>Peijie Ma</strong>");
 }
 
 

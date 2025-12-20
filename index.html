@@ -896,70 +896,88 @@
 
     <script>
         // =========================================
-        // ANALYTICS CHART CONFIGURATION
+        // 1. Scroll Reveal Logic (保持不变)
         // =========================================
-
-        // 1. 获取 Canvas 上下文
-        const ctx = document.getElementById('timeDistributionChart').getContext('2d');
-
-        // 2. 定义配色方案 (贴合你的 Warm Editorial 主题)
-        // 使用 rgba 以便让堆叠区域看起来通透
-        const colors = {
-            study: 'rgba(200, 200, 200, 0.5)',   // 灰色：代表早期基础
-            game: 'rgba(255, 159, 64, 0.6)',    // 橙色：代表活力与娱乐
-            coding: 'rgba(42, 42, 42, 0.85)',     // 深黑：代表专业核心 (你的主业)
-            music: 'rgba(100, 100, 100, 0.3)',   // 中灰：代表陶冶情操
-            social: 'rgba(200, 107, 64, 0.7)'     // 铁锈红：代表生活与家庭 (Accent Color)
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
         };
 
-        // 3. 初始化图表
-        const timeChart = new Chart(ctx, {
-            type: 'line', // 在 Chart.js 中，堆叠面积图也是 line 类型，只是开启 fill
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-on-scroll').forEach((el) => {
+            observer.observe(el);
+        });
+
+        // =========================================
+        // 2. Chart.js Configuration (Time Analytics)
+        // =========================================
+
+        // 注意：确保你的 HTML 里 canvas 的 ID 是 'timeDistributionChart'
+        // 如果你之前的 HTML ID 还是 'timeChart'，请在这里改为 'timeChart'
+        const ctx = document.getElementById('timeDistributionChart').getContext('2d');
+
+        // 定义配色方案 (Harmony Palette)
+        const colorStudy = 'rgba(200, 200, 200, 0.4)';  // Study: 浅灰 (早期高，后期低)
+        const colorGame = 'rgba(255, 159, 64, 0.5)';   // Game: 活力橙 (青春期波峰)
+        const colorCoding = 'rgba(42, 42, 42, 0.85)';    // Coding: 深黑 (主力，越来越高)
+        const colorMusic = 'rgba(100, 100, 100, 0.3)';  // Music: 中灰 (点缀)
+        const colorSocial = 'rgba(200, 107, 64, 0.7)';   // Social: 暖焦糖 (稳定)
+
+        new Chart(ctx, {
+            type: 'line',
             data: {
-                // X轴：人生阶段 (从幼年 -> 现在)
-                labels: ['Childhood', '12y', '15y', '18y', '22y', '24y', 'Now'],
+                // X轴：人生阶段 (从幼年到现在的20多岁)
+                labels: ['5y', '10y', '14y', '18y', '22y', '24y', 'Now'],
                 datasets: [
                     {
-                        label: 'Study (School)',
-                        // 逻辑：早期占比极高(上学)，大学后转化为专业研究(Coding)，所以下降
-                        data: [85, 75, 60, 40, 15, 10, 5],
-                        backgroundColor: colors.study,
-                        borderColor: 'transparent', // 不显示边框线，为了视觉更平滑
+                        label: 'Study',
+                        // 早期占比极高，随着毕业和工作逐渐降低
+                        data: [80, 70, 60, 45, 15, 10, 5],
+                        backgroundColor: colorStudy,
+                        borderColor: 'transparent',
                         fill: true,
-                        tension: 0.4 // 贝塞尔曲线平滑度
+                        tension: 0.4
                     },
                     {
-                        label: 'Gaming',
-                        // 逻辑：青少年时期(12-18)激增，工作后减少
-                        data: [5, 15, 25, 20, 10, 5, 5],
-                        backgroundColor: colors.game,
+                        label: 'Game',
+                        // 青少年时期(14-18y)达到顶峰，之后减少
+                        data: [10, 20, 30, 20, 10, 5, 5],
+                        backgroundColor: colorGame,
                         borderColor: 'transparent',
                         fill: true,
                         tension: 0.4
                     },
                     {
                         label: 'Coding & Research',
-                        // 逻辑：随年龄持续上升，成年后成为主导
-                        data: [0, 0, 5, 25, 50, 60, 65],
-                        backgroundColor: colors.coding,
+                        // 成年后开始出现，并在现在占据主导
+                        data: [0, 0, 5, 15, 45, 55, 60],
+                        backgroundColor: colorCoding,
                         borderColor: 'transparent',
                         fill: true,
                         tension: 0.4
                     },
                     {
-                        label: 'Music',
-                        // 逻辑：一直存在的小爱好，后期略微回升
-                        data: [0, 5, 5, 5, 5, 5, 10],
-                        backgroundColor: colors.music,
+                        label: 'Music/Art',
+                        // 始终存在的小爱好，后期略有回升
+                        data: [0, 5, 0, 5, 10, 10, 10],
+                        backgroundColor: colorMusic,
                         borderColor: 'transparent',
                         fill: true,
                         tension: 0.4
                     },
                     {
                         label: 'Social & Family',
-                        // 逻辑：贯穿始终，成年后趋于稳定
-                        data: [10, 5, 5, 10, 20, 20, 15],
-                        backgroundColor: colors.social,
+                        // 贯穿始终，成年后趋于稳定
+                        data: [10, 5, 5, 15, 20, 20, 20],
+                        backgroundColor: colorSocial,
                         borderColor: 'transparent',
                         fill: true,
                         tension: 0.4
@@ -968,60 +986,43 @@
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false, // 允许自适应父容器高度
-                interaction: {
-                    mode: 'nearest',
-                    axis: 'x',
-                    intersect: false
-                },
+                maintainAspectRatio: false, // 允许图表自适应容器高度
                 plugins: {
                     legend: {
                         position: 'bottom', // 图例放在底部
                         labels: {
-                            usePointStyle: true, // 用圆点代替方块
-                            boxWidth: 8,
-                            font: {
-                                family: "'Space Grotesk', sans-serif", // 配合网站字体
-                                size: 11
-                            },
-                            color: '#666'
+                            boxWidth: 10,
+                            usePointStyle: true,
+                            font: { family: 'Inter', size: 11 }
                         }
                     },
                     tooltip: {
-                        backgroundColor: 'rgba(255, 255, 255, 0.95)', // 白色背景悬浮窗
-                        titleColor: '#000',
-                        bodyColor: '#333',
-                        borderColor: 'rgba(0,0,0,0.1)',
-                        borderWidth: 1,
-                        titleFont: { family: "'Space Grotesk', sans-serif", weight: 'bold' },
-                        bodyFont: { family: "'Inter', sans-serif" },
-                        callbacks: {
-                            label: function (context) {
-                                return ' ' + context.dataset.label + ': ' + context.raw + '%';
-                            }
-                        }
+                        mode: 'index',
+                        intersect: false,
+                        backgroundColor: '#2A2A2A',
+                        titleColor: '#fff',
+                        bodyFont: { family: 'Inter' },
+                        padding: 10,
+                        cornerRadius: 8
                     }
                 },
                 scales: {
-                    x: {
-                        grid: { display: false }, // 隐藏 X 轴网格，更干净
-                        ticks: {
-                            color: '#999',
-                            font: { family: "'Space Grotesk', sans-serif", size: 10 }
-                        }
-                    },
                     y: {
-                        stacked: true, // 【关键】：开启堆叠模式
-                        display: false, // 隐藏 Y 轴数值 (为了艺术感，只看趋势)
+                        stacked: true,    // 开启堆叠模式
+                        display: false,   // 隐藏Y轴数值，让视觉更干净
                         min: 0,
                         max: 100
+                    },
+                    x: {
+                        grid: { display: false }, // 隐藏X轴网格
+                        ticks: {
+                            color: '#888',
+                            font: { family: 'Space Grotesk', size: 10 }
+                        }
                     }
                 },
                 elements: {
-                    point: {
-                        radius: 0, // 隐藏数据点，只显示平滑色块
-                        hitRadius: 20 // 鼠标放上去时更容易触发
-                    }
+                    point: { radius: 0, hitRadius: 20 } // 隐藏数据点，只显示平滑曲线
                 }
             }
         });

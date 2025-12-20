@@ -131,7 +131,7 @@ function classifyEntry(tags) {
 
     // 1️⃣ Journal Articles (highest priority)
     // Heuristics: journal field exists OR venue contains "journal"
-    if (tags.journal || venue.includes("journal")) {
+    if (tags.journal || venue.includes("journal") || venue.includes("Journal")) {
         return "Journal";
     }
 

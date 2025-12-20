@@ -1,72 +1,120 @@
 /* =========================================
-   6. PROJECTS GRID STYLE (Restored)
+   6. PROJECTS GRID STYLE (Tech Upgrade)
    ========================================= */
 .project-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 24px;
     margin-top: 24px;
 }
 
 .project-card {
-    background: #fff;
-    border-radius: 12px;
-    border: 1px solid var(--border-color);
-    padding: 24px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* 基础玻璃拟态 */
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    border-radius: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 28px;
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
+
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 1;
 }
 
+/* 悬停时的 3D 上浮与发光 */
 .project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-    border-color: var(--accent-color);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1),
+        0 0 0 2px var(--accent-color);
+    /* 模拟高亮边框 */
+    border-color: transparent;
 }
 
+/* --- 酷炫特效：背景中的科技网格点缀 --- */
+.project-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 150px;
+    height: 150px;
+    background-image: radial-gradient(var(--accent-color) 1px, transparent 1px);
+    background-size: 10px 10px;
+    opacity: 0.1;
+    mask-image: radial-gradient(circle at top right, black, transparent 70%);
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.project-card:hover::before {
+    opacity: 0.25;
+    /* 悬停时网格变明显 */
+}
+
+/* --- 内容样式 --- */
 .project-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 12px;
+    align-items: center;
+    margin-bottom: 16px;
 }
 
 .project-title {
-    font-size: 1.2rem;
-    font-weight: 600;
+    font-size: 1.25rem;
+    font-weight: 700;
     color: var(--text-primary);
+    font-family: 'Space Grotesk', sans-serif;
+    /* 强调科技字体 */
+    letter-spacing: -0.02em;
 }
 
 .project-year {
-    font-size: 0.85rem;
-    color: var(--text-light);
-    font-family: var(--font-heading);
-    background: rgba(0, 0, 0, 0.03);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
     padding: 2px 8px;
     border-radius: 4px;
+    background: rgba(var(--accent-rgb), 0.05);
 }
 
 .project-desc {
     font-size: 0.95rem;
     color: var(--text-secondary);
-    margin-bottom: 20px;
-    line-height: 1.5;
+    margin-bottom: 24px;
+    line-height: 1.6;
+    flex-grow: 1;
 }
 
+/* --- 标签升级 --- */
 .project-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin-top: auto;
 }
 
 .tag {
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-    background: var(--bg-color);
-    padding: 4px 10px;
-    border-radius: 100px;
-    font-weight: 500;
+    font-size: 0.7rem;
+    color: #555;
+    background: #f0f2f5;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+/* 悬停卡片时，标签也稍微变色 */
+.project-card:hover .tag {
+    background: #fff;
+    border-color: #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }

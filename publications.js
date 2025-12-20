@@ -39,11 +39,23 @@ function formatAuthors(authorStr) {
     }).join(", ");
 }
 
+// --- 在 publications.js 中替换此函数 ---
+
 function classifyEntry(tags) {
-    // 简单分类逻辑
+    // 1. 预处理：获取小写字段以进行不区分大小写的匹配
+    const journal = (tags.journal || "").toLowerCase();
+    const publisher = (tags.publisher || "").toLowerCase();
+    const booktitle = (tags.booktitle || "").toLowerCase();
+
+    // 2. 优先判定 arXiv (因为 bib 文件里 arXiv 经常写在 journal 字段里)
+    if (journal.includes("arxiv") || publisher.includes("arxiv") || booktitle.includes("arxiv")) {
+        return "arXiv";
+    }
+
+    // 3. 正常的分类逻辑
     if (tags.journal) return "Journal";
     if (tags.booktitle) return "Conference";
-    if (tags.publisher && tags.publisher.toLowerCase().includes("arxiv")) return "arXiv";
+
     return "Other";
 }
 

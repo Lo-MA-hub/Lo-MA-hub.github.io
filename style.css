@@ -40,3 +40,16 @@ h2 {
     font-size: 1.4rem;
     margin-bottom: 0.6em;
 }
+
+.pub-list {
+    padding-left: 20px;
+}
+
+.pub-list li {
+    margin-bottom: 1.2em;
+    line-height: 1.5;
+}
+
+.venue {
+    font-weight: 600;
+}

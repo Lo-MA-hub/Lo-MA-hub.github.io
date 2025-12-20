@@ -124,38 +124,45 @@ function detectArxiv(tags) {
     return null;
 }
 
+function isArxivJournal(tags) {
+    const journal = (tags.journal || "").toLowerCase();
+    return journal.includes("arxiv");
+}
+
+
 function classifyEntry(tags) {
     const venue = getVenue(tags).toLowerCase();
-    const note = getNote(tags).toLowerCase();
-    const arxiv = detectArxiv(tags);
 
-    // 1️⃣ Journal Articles (highest priority)
-    // Heuristics: journal field exists OR venue contains "journal"
-    if (tags.journal || venue.includes("journal") || venue.includes("Journal")) {
+    // 1️⃣ arXiv Preprints —— 必须最先拦截
+    // 情况 A：journal = "arXiv preprint arXiv:xxxx.xxxxx"
+    // 情况 B：detectArxiv() 能识别
+    if (isArxivJournal(tags) || detectArxiv(tags)) {
+        return "arXiv";
+    }
+
+    // 2️⃣ Journal Articles（非 arXiv）
+    if (tags.journal && !isArxivJournal(tags)) {
         return "Journal";
     }
 
-    // 2️⃣ Conference Papers
+    // 3️⃣ Conference Papers
     const confHints = [
         "conference",
-        "symposium",
-        "workshop",
-        "globecom",
         "icc",
-        "infocom"
+        "globecom",
+        "infocom",
+        "symposium",
+        "workshop"
     ];
     if (venue && confHints.some(h => venue.includes(h))) {
         return "Conference";
     }
 
-    // 3️⃣ arXiv Preprints
-    if (arxiv) {
-        return "arXiv";
-    }
-
     // 4️⃣ Other
     return "Other";
 }
+
+
 
 
 function buildLinks(tags) {
@@ -245,6 +252,7 @@ async function main() {
         };
 
 
+
         entries.forEach(e => {
             const tags = e.entryTags || {};
             const cls = classifyEntry(tags);
@@ -270,6 +278,7 @@ async function main() {
             renderSection("Conference Papers", buckets.Conference) +
             renderSection("arXiv Preprints", buckets.arXiv) +
             renderSection("Other", buckets.Other);
+
 
 
         // Fallback if everything empty

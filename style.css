@@ -24,8 +24,11 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+.home-page *,
+.home-page a {
     cursor: none;
-    /* Hide default cursor for custom one */
 }
 
 body {
@@ -40,7 +43,11 @@ body {
 a {
     text-decoration: none;
     color: inherit;
-    cursor: none;
+}
+
+:focus-visible {
+    outline: 2px solid var(--lando-neon);
+    outline-offset: 4px;
 }
 
 /* --- TYPOGRAPHY --- */
@@ -117,7 +124,7 @@ body:has(.project-card:hover) #cursor-outline {
 }
 
 .hero-bio-large {
-    font-size: 3rem;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
     line-height: 1.1;
     margin-bottom: 1.5rem;
     margin-top: 2rem;
@@ -254,15 +261,6 @@ body:has(.project-card:hover) #cursor-outline {
     clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%);
 }
 
-.id-avatar {
-    width: 60px;
-    height: 60px;
-    margin: 0 auto 10px;
-    border: 1px solid var(--lando-neon);
-    border-radius: 50%;
-    object-fit: cover;
-}
-
 .id-name {
     font-size: 1rem;
     margin: 0;
@@ -382,6 +380,71 @@ body:has(.project-card:hover) #cursor-outline {
     position: relative;
     display: flex;
     flex-direction: column;
+}
+
+.research-card,
+.achievement-card {
+    min-height: 280px;
+    height: auto;
+}
+
+.panel-kicker {
+    color: var(--mclaren-orange);
+    font: 700 0.72rem var(--font-heading);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.research-copy {
+    margin-top: auto;
+    color: #aaa;
+    font-size: 0.95rem;
+}
+
+.research-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.research-tags span {
+    border: 1px solid #3d3d3d;
+    color: var(--lando-neon);
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 5px 8px;
+    text-transform: uppercase;
+}
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    margin-top: 18px;
+    background: #333;
+    border: 1px solid #333;
+}
+
+.stat-grid div {
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 12px;
+    background: #111;
+}
+
+.stat-grid strong {
+    color: white;
+    font: 700 1.45rem var(--font-heading);
+}
+
+.stat-grid span {
+    color: #888;
+    font-size: 0.68rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
 }
 
 /* Decorate the cards with "Corners" */
@@ -524,6 +587,16 @@ body:has(.project-card:hover) #cursor-outline {
     background: linear-gradient(145deg, #161616 0%, #0a0a0a 100%);
 }
 
+.project-card-static {
+    cursor: default;
+}
+
+.project-card-static:hover {
+    border-left-color: var(--mclaren-orange);
+    transform: skewX(var(--skew-degree));
+    box-shadow: none;
+}
+
 .project-header {
     display: flex;
     justify-content: space-between;
@@ -653,6 +726,16 @@ body:has(.project-card:hover) #cursor-outline {
 
 /* Mobile Adjustments */
 @media (max-width: 768px) {
+    .home-page *,
+    .home-page a {
+        cursor: auto;
+    }
+
+    #cursor-dot,
+    #cursor-outline {
+        display: none;
+    }
+
     .marquee-content {
         font-size: 2rem;
     }
@@ -672,5 +755,16 @@ body:has(.project-card:hover) #cursor-outline {
 
     .btn-primary {
         transform: skewX(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
     }
 }

@@ -1,10 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 
 <head>
     <meta charset="UTF-8">
-    <title>Peijie (Max) Ma | LN4 Style</title>
+    <title>Peijie (Max) Ma | 6G Wireless Researcher at NYU</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Peijie (Max) Ma is a 6G wireless researcher at NYU Tandon working on wireless digital twins, ray tracing, propagation measurements, and channel modeling.">
+    <meta name="author" content="Peijie Ma">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://lo-ma-hub.github.io/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Peijie (Max) Ma">
+    <meta property="og:title" content="Peijie (Max) Ma | 6G Wireless Researcher at NYU">
+    <meta property="og:description" content="6G wireless research, digital twins, ray tracing, propagation measurements, and channel modeling at NYU Tandon.">
+    <meta property="og:url" content="https://lo-ma-hub.github.io/">
+    <meta property="og:image" content="https://lo-ma-hub.github.io/assets/photo.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Peijie (Max) Ma | 6G Wireless Researcher at NYU">
+    <meta name="twitter:description" content="6G wireless research, digital twins, ray tracing, propagation measurements, and channel modeling at NYU Tandon.">
+    <meta name="twitter:image" content="https://lo-ma-hub.github.io/assets/photo.jpg">
 
     <link rel="icon" type="image/png" href="favicon.png?v=1">
     <link rel="apple-touch-icon" href="favicon.png?v=1">
@@ -17,13 +31,29 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Peijie Ma",
+      "alternateName": "Max Ma",
+      "url": "https://lo-ma-hub.github.io/",
+      "image": "https://lo-ma-hub.github.io/assets/photo.jpg",
+      "jobTitle": "6G Wireless Researcher",
+      "affiliation": { "@type": "CollegeOrUniversity", "name": "NYU Tandon School of Engineering" },
+      "email": "mailto:pm3688@nyu.edu",
+      "sameAs": ["https://github.com/Lo-MA-hub"],
+      "knowsAbout": ["6G wireless", "wireless digital twins", "ray tracing", "wireless propagation", "channel modeling"]
+    }
+    </script>
 </head>
 
 <body>
     <div id="cursor-dot"></div>
     <div id="cursor-outline"></div>
 
-    <section class="hero-section reveal-on-scroll" id="identity-orbit-section">
+    <main>
+    <section class="hero-section reveal-on-scroll" id="identity-orbit-section" aria-labelledby="page-title">
         <div class="identity-orbit">
             <div class="orbit-ring ring-outer"></div>
             <div class="orbit-ring ring-inner"></div>
@@ -47,9 +77,9 @@
             </div>
 
             <div class="id-card">
-                <div class="id-avatar-placeholder">PM</div>
+                <img class="id-avatar" src="assets/photo.jpg" alt="Peijie Ma">
                 <div class="id-info">
-                    <h1 class="id-name">Peijie Ma</h1>
+                    <h1 class="id-name" id="page-title">Peijie Ma</h1>
                     <p class="id-role">6G Architect // NYU</p>
                     <div class="id-divider"></div>
                     <div class="id-socials">
@@ -123,23 +153,23 @@
         </div>
     </section>
 
-    <section class="container reveal-on-scroll" style="margin-bottom: 4rem;">
-        <h2 class="section-title">Selected Projects</h2>
+    <section class="container reveal-on-scroll" style="margin-bottom: 4rem;" aria-labelledby="projects-title">
+        <h2 class="section-title" id="projects-title">Selected Projects</h2>
         <div class="project-grid">
 
-            <a href="https://github.com/Lo-MA-hub" target="_blank" class="project-card">
+            <a href="floorplan.html" class="project-card">
                 <div class="project-content">
                     <div class="project-header">
-                        <h3 class="project-title">NYURay Simulator</h3>
-                        <span class="project-year">2024</span>
+                        <h3 class="project-title">Floorplan → 3D</h3>
+                        <span class="project-year">2026</span>
                     </div>
                     <p class="project-desc">
-                        High-fidelity ray tracing for 6G propagation. Calibrated with real-world FR3 measurements.
+                        Furniture-aware floorplan understanding and one-click 3D indoor reconstruction with an interactive model viewer.
                     </p>
                     <div class="project-tags">
-                        <span class="tag">C++</span>
-                        <span class="tag">Ray Tracing</span>
-                        <span class="tag">6G</span>
+                        <span class="tag">Computer Vision</span>
+                        <span class="tag">3D Reconstruction</span>
+                        <span class="tag">CubiCasa5K</span>
                     </div>
                 </div>
             </a>
@@ -180,13 +210,14 @@
         </div>
     </section>
 
-    <div class="container reveal-on-scroll" style="margin-bottom: 6rem;">
-        <h2 class="section-title">Publication Data</h2>
+    <section class="container reveal-on-scroll" style="margin-bottom: 6rem;" aria-labelledby="publications-title">
+        <h2 class="section-title" id="publications-title">Research Publications</h2>
         <div id="publications-container">
             <p style="color:var(--text-secondary);">Initializing Data Stream...</p>
         </div>
-    </div>
+    </section>
 
+    </main>
     <footer class="container">
         <div style="font-family: 'Space Grotesk'; text-transform: uppercase;">&copy; 2025 Peijie Ma. // 6G Speed.</div>
         <div style="font-size: 0.8rem; opacity: 0.5;">NYU TANDON // NEW YORK</div>

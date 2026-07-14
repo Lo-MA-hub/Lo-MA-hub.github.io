@@ -254,19 +254,13 @@ body:has(.project-card:hover) #cursor-outline {
     clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%);
 }
 
-.id-avatar-placeholder {
+.id-avatar {
     width: 60px;
     height: 60px;
-    background: #222;
-    color: var(--lando-neon);
     margin: 0 auto 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: 1.2rem;
     border: 1px solid var(--lando-neon);
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .id-name {

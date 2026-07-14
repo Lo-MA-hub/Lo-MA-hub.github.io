@@ -1,0 +1,41 @@
+.floorplan-page { min-height: 100vh; background: radial-gradient(circle at 70% 8%, rgba(204,255,0,.08), transparent 28rem), #050505; }
+.reconstruction-app { width: min(1240px, calc(100% - 48px)); margin: 0 auto; padding: 32px 0 64px; }
+.back-link { color: #aaa; font: 600 .78rem var(--font-heading); letter-spacing: .08em; text-transform: uppercase; }
+.back-link:hover { color: var(--lando-neon); }
+.reconstruction-header { max-width: 760px; margin: 70px 0 42px; }
+.reconstruction-header h1 { font-size: clamp(3rem, 8vw, 6rem); line-height: .95; margin: .8rem 0 1.3rem; }
+.reconstruction-header > p:last-child { color: #aaa; font-size: 1.1rem; }
+.studio-grid { display: grid; grid-template-columns: minmax(260px, .72fr) minmax(0, 1.55fr); gap: 20px; }
+.panel { border: 1px solid #333; background: rgba(17,17,17,.82); padding: 26px; }
+.panel-kicker { margin-bottom: 6px; color: var(--mclaren-orange); font: 700 .72rem var(--font-heading); letter-spacing: .14em; }
+.panel h2 { font-size: 1.45rem; font-style: normal; }
+.upload-zone { min-height: 225px; margin: 24px 0 14px; border: 1px dashed #5a5a5a; background: #0a0a0a; display: flex; flex-direction: column; gap: 8px; align-items: center; justify-content: center; text-align: center; color: #999; cursor: pointer; transition: .2s; }
+.upload-zone:hover, .upload-zone.is-dragover { border-color: var(--lando-neon); background: rgba(204,255,0,.04); color: white; }
+.upload-zone strong { color: white; font-family: var(--font-heading); text-transform: uppercase; }
+.upload-icon { color: var(--lando-neon); font-size: 2rem; line-height: 1; }
+.input-preview { position: relative; height: 225px; margin: 24px 0 14px; background: #070707; }
+.input-preview img { width: 100%; height: 100%; object-fit: contain; }
+.clear-upload { position: absolute; right: 8px; top: 8px; width: 29px; height: 29px; border: 1px solid #555; border-radius: 50%; color: white; background: #111; font-size: 1.2rem; cursor: pointer; }
+.reconstruct-button { width: 100%; border: 0; padding: 14px; background: var(--lando-neon); color: #000; font: 700 .85rem var(--font-heading); text-transform: uppercase; cursor: pointer; transition: .2s; }
+.reconstruct-button:disabled { cursor: not-allowed; background: #333; color: #777; }
+.reconstruct-button:not(:disabled):hover { background: white; }
+.upload-note { margin-top: 15px; color: #777; font-size: .8rem; }
+.viewer-panel { min-width: 0; display: flex; flex-direction: column; }
+.viewer-topline { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.live-badge { border: 1px solid rgba(204,255,0,.6); color: var(--lando-neon); padding: 5px 7px; font: 700 .62rem var(--font-heading); letter-spacing: .08em; }
+.three-viewer { height: 500px; margin-top: 18px; background: linear-gradient(135deg,#101010,#050505); cursor: grab; }
+.three-viewer:active { cursor: grabbing; }
+.three-viewer canvas { display: block; width: 100%; height: 100%; }
+.viewer-controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+.viewer-controls button { padding: 7px 10px; color: white; background: transparent; border: 1px solid #444; font: 600 .73rem var(--font-heading); text-transform: uppercase; cursor: pointer; }
+.viewer-controls button:hover { border-color: var(--lando-neon); color: var(--lando-neon); }
+.viewer-controls span { margin-left: auto; color: #777; font-size: .75rem; }
+.pipeline { display: grid; grid-template-columns: .9fr 2fr; gap: 35px; margin-top: 20px; align-items: start; }
+.pipeline ol { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; counter-reset: steps; }
+.pipeline li { border-left: 1px solid #444; padding-left: 15px; }
+.pipeline strong { display:block; color: var(--lando-neon); font-family: var(--font-heading); text-transform: uppercase; }
+.pipeline span { display:block; margin-top: 6px; color:#aaa; font-size:.82rem; line-height:1.45; }
+.deployment-note { margin: 42px auto 0; max-width: 780px; color: #aaa; text-align: center; }
+.deployment-note h2 { color: white; font-size: 1.1rem; font-style: normal; margin-bottom: 9px; }
+.deployment-note p { font-size: .88rem; }
+@media (max-width: 800px) { .reconstruction-app { width:min(100% - 32px,1240px); } .reconstruction-header { margin: 50px 0 30px; } .studio-grid,.pipeline { grid-template-columns: 1fr; } .three-viewer { height: 390px; } .pipeline ol { grid-template-columns: 1fr; } }

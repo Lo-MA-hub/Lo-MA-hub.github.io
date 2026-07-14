@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lo-ma-hub.github.io/sitemap.xml

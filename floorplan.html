@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive demonstration of Peijie Ma's furniture-aware floorplan understanding and 3D indoor reconstruction project.">
+    <title>Floorplan to 3D | Peijie (Max) Ma</title>
+    <link rel="canonical" href="https://lo-ma-hub.github.io/floorplan.html">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="floorplan.css">
+</head>
+<body class="floorplan-page">
+    <main class="reconstruction-app">
+        <a class="back-link" href="index.html">← Back to portfolio</a>
+        <header class="reconstruction-header">
+            <p class="intro-label">/// COMPUTER VISION PROJECT ///</p>
+            <h1>Floorplan <span class="highlight-neon">→</span> <span class="highlight-orange">3D</span></h1>
+            <p>Furniture-aware indoor reconstruction from a single floorplan image.</p>
+        </header>
+
+        <section class="studio-grid" aria-label="Interactive floorplan reconstruction demonstration">
+            <section class="upload-panel panel">
+                <p class="panel-kicker">01 / INPUT</p>
+                <h2>Upload a floorplan</h2>
+                <label class="upload-zone" for="floorplan-input" id="upload-zone">
+                    <span class="upload-icon">＋</span>
+                    <strong>Drop an image here</strong>
+                    <span>PNG, JPG, or WEBP</span>
+                </label>
+                <input id="floorplan-input" type="file" accept="image/png,image/jpeg,image/webp" hidden>
+                <div class="input-preview" id="input-preview" hidden>
+                    <img id="input-image" alt="Uploaded floorplan preview">
+                    <button type="button" class="clear-upload" id="clear-upload" aria-label="Remove uploaded floorplan">×</button>
+                </div>
+                <button class="reconstruct-button" type="button" id="reconstruct-button" disabled>Generate 3D model</button>
+                <p class="upload-note" id="upload-note">Use the reference scene to explore the completed reconstruction pipeline.</p>
+            </section>
+
+            <section class="viewer-panel panel">
+                <div class="viewer-topline">
+                    <div><p class="panel-kicker">02 / OUTPUT</p><h2>Interactive reconstruction</h2></div>
+                    <span class="live-badge">REFERENCE SCENE</span>
+                </div>
+                <div id="three-viewer" class="three-viewer" aria-label="Interactive 3D apartment reconstruction"></div>
+                <div class="viewer-controls">
+                    <button type="button" data-view="iso">Isometric</button>
+                    <button type="button" data-view="top">Top</button>
+                    <button type="button" data-view="reset">Reset</button>
+                    <span>Drag to rotate · Scroll to zoom</span>
+                </div>
+            </section>
+        </section>
+
+        <section class="pipeline panel">
+            <div><p class="panel-kicker">PIPELINE</p><h2>From pixels to a navigable scene</h2></div>
+            <ol>
+                <li><strong>Parse</strong><span>Multi-task CNN recognizes rooms, walls, and icons.</span></li>
+                <li><strong>Vectorize</strong><span>Wall centerlines, openings, and furniture are converted to geometry.</span></li>
+                <li><strong>Reconstruct</strong><span>Extruded geometry creates an interactive 3D interior model.</span></li>
+            </ol>
+        </section>
+
+        <section class="deployment-note">
+            <h2>About live uploads</h2>
+            <p>This public site includes the finished interactive viewer. Live processing of a new plan requires the CubiCasa5K model to run on a separate inference service; GitHub Pages cannot execute PyTorch models.</p>
+        </section>
+    </main>
+    <script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.165.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.165.0/examples/jsm/"}}</script>
+    <script type="module" src="floorplan.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+torch
+fastapi
+uvicorn[standard]
+python-multipart
+opencv-python-headless
+scikit-image
+scipy
+shapely
+pillow
+matplotlib
